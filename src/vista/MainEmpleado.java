@@ -1,6 +1,8 @@
 package vista;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import vista.Empleado.RegistrarCliente;
+import vista.Empleado.ReservaHora;
 
 public class MainEmpleado extends javax.swing.JFrame {
 
@@ -8,10 +10,11 @@ public class MainEmpleado extends javax.swing.JFrame {
     public MainEmpleado() {
         initComponents();
     }
-    
+   public String username;
+   
    public MainEmpleado(String usuario) {
         initComponents();
-        
+        username=usuario;
         //Caracteristicas de la ventana
         lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -240,7 +243,9 @@ public class MainEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        RegistrarCliente ventanaRegistro = new RegistrarCliente(username);
+        ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
     private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
@@ -248,7 +253,9 @@ public class MainEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_regCliente1ActionPerformed
 
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
-        // TODO add your handling code here:
+       ReservaHora ventanaReserva = new ReservaHora(username);
+       ventanaReserva.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_btn_resHoraActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed

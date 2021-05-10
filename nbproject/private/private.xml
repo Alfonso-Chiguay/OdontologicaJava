@@ -3,17 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/Administrador/CrearCliente.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/MainAdministrador.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/Administrador/AdmOrden.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/database/Conexion.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/Administrador/CrearProveedor.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/Administrador/EditarProveedor.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/odontologicaescritorio/main.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/Administrador/AdmProveedor.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/Login.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/Administrador/AdmCliente.java</file>
-            <file>file:/C:/Users/Saave/OneDrive/Documentos/NetBeansProjects/OdontologicaEscritorio/src/vista/Administrador/CrearOrden.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/RegistrarCliente.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/MainEmpleado.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Login.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/ReservaHora.java</file>
         </group>
     </open-files>
 </project-private>

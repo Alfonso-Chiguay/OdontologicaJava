@@ -1,5 +1,4 @@
 package vista;
-
 import java.awt.Toolkit;
 import javafx.scene.paint.Color;
 import vista.MainEmpleado;
@@ -160,9 +159,11 @@ public class Login extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
 
             this.dispose();
-            MainAdministrador ventanaAdmin = new MainAdministrador("caro");
-            ventanaAdmin.setVisible(true);
-        
+            //MainAdministrador ventanaAdmin = new MainAdministrador("caro");
+            //ventanaAdmin.setVisible(true);
+            MainEmpleado ventanaEmpleado = new MainEmpleado("Usuario");
+            ventanaEmpleado.setVisible(true);
+            
         
     }//GEN-LAST:event_btn_loginActionPerformed
 
