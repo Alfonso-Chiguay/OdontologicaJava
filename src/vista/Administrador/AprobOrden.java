@@ -2,9 +2,7 @@ package vista.Administrador;
 import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
-import vista.Administrador.AdmCliente;
-import vista.Administrador.AdmProveedor;
-import vista.Administrador.AdmOrden;
+
 
 public class AprobOrden extends javax.swing.JFrame {
 
@@ -46,17 +44,18 @@ public class AprobOrden extends javax.swing.JFrame {
         btn_ordenPedido = new javax.swing.JButton();
         btn_admBoleta = new javax.swing.JButton();
         btn_admEmpleado = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_informes = new javax.swing.JButton();
         btn_admEmpresa = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_orden = new javax.swing.JTable();
-        btn_aprobar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        btn_aprobar1 = new javax.swing.JButton();
+        btn_rechazaOrden = new javax.swing.JButton();
+        btn_aprobOrden = new javax.swing.JButton();
+        btn_anularOrden = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        btn_buscarpedido = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
@@ -133,6 +132,11 @@ public class AprobOrden extends javax.swing.JFrame {
         btn_admBoleta.setText("Adm. Boleta de servicio");
         btn_admBoleta.setBorderPainted(false);
         btn_admBoleta.setFocusPainted(false);
+        btn_admBoleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_admBoletaActionPerformed(evt);
+            }
+        });
 
         btn_admEmpleado.setBackground(new java.awt.Color(12, 140, 153));
         btn_admEmpleado.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -146,12 +150,17 @@ public class AprobOrden extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(12, 140, 153));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Informes");
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
+        btn_informes.setBackground(new java.awt.Color(12, 140, 153));
+        btn_informes.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_informes.setForeground(new java.awt.Color(255, 255, 255));
+        btn_informes.setText("Informes");
+        btn_informes.setBorderPainted(false);
+        btn_informes.setFocusPainted(false);
+        btn_informes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_informesActionPerformed(evt);
+            }
+        });
 
         btn_admEmpresa.setBackground(new java.awt.Color(12, 140, 153));
         btn_admEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -182,14 +191,14 @@ public class AprobOrden extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btn_admEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                .addComponent(btn_informes, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
         );
         colorBotonTopLayout.setVerticalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_admCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
             .addComponent(btn_admProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_informes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admBoleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -229,23 +238,30 @@ public class AprobOrden extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbl_orden);
 
-        btn_aprobar.setBackground(new java.awt.Color(204, 0, 0));
-        btn_aprobar.setText("Rechazar");
+        btn_rechazaOrden.setBackground(new java.awt.Color(204, 0, 0));
+        btn_rechazaOrden.setText("Rechazar");
 
-        jButton2.setBackground(new java.awt.Color(17, 175, 191));
-        jButton2.setText("Aprobar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_aprobOrden.setBackground(new java.awt.Color(17, 175, 191));
+        btn_aprobOrden.setText("Aprobar");
+        btn_aprobOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_aprobOrdenActionPerformed(evt);
             }
         });
 
-        btn_aprobar1.setBackground(new java.awt.Color(102, 0, 0));
-        btn_aprobar1.setText("Anular");
+        btn_anularOrden.setBackground(new java.awt.Color(102, 0, 0));
+        btn_anularOrden.setText("Anular");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Resumen orden de pedido ");
+
+        btn_buscarpedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Buscar (3).png"))); // NOI18N
+        btn_buscarpedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarpedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -253,11 +269,11 @@ public class AprobOrden extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_aprobOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(btn_aprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_rechazaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_aprobar1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_anularOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(414, 414, 414))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,30 +281,37 @@ public class AprobOrden extends javax.swing.JFrame {
                         .addGap(283, 283, 283)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_buscarpedido))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(278, 278, 278)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 411, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btn_buscarpedido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_aprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_aprobar1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_rechazaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_aprobOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_anularOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(234, 234, 234))
         );
 
@@ -329,10 +352,7 @@ public class AprobOrden extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btn_logout))))
             .addComponent(colorBotonTop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, colorTopLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         colorTopLayout.setVerticalGroup(
             colorTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,11 +413,15 @@ public class AprobOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_admEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpleadoActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        AdmEmpleados ventanaEmpleados = new AdmEmpleados(username);
+        ventanaEmpleados.setVisible(true); 
     }//GEN-LAST:event_btn_admEmpleadoActionPerformed
 
     private void btn_admEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpresaActionPerformed
-        // TODO add your handling code here:
+        AdmEmpresa ventanaEmpresa = new AdmEmpresa(username);
+        ventanaEmpresa.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admEmpresaActionPerformed
 
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
@@ -410,9 +434,25 @@ public class AprobOrden extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_aprobOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aprobOrdenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_aprobOrdenActionPerformed
+
+    private void btn_buscarpedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarpedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_buscarpedidoActionPerformed
+
+    private void btn_admBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admBoletaActionPerformed
+        this.dispose();
+        AdmBoleta ventanaBoleta = new AdmBoleta(username);
+        ventanaBoleta.setVisible(true);
+    }//GEN-LAST:event_btn_admBoletaActionPerformed
+
+    private void btn_informesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informesActionPerformed
+        this.dispose();
+        Informe ventanaInformes = new Informe(username);
+        ventanaInformes.setVisible(true);
+    }//GEN-LAST:event_btn_informesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -458,16 +498,17 @@ public class AprobOrden extends javax.swing.JFrame {
     private javax.swing.JButton btn_admEmpleado;
     private javax.swing.JButton btn_admEmpresa;
     private javax.swing.JButton btn_admProveedor;
-    private javax.swing.JButton btn_aprobar;
-    private javax.swing.JButton btn_aprobar1;
+    private javax.swing.JButton btn_anularOrden;
+    private javax.swing.JButton btn_aprobOrden;
+    private javax.swing.JButton btn_buscarpedido;
+    private javax.swing.JButton btn_informes;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
+    private javax.swing.JButton btn_rechazaOrden;
     private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_resHora1;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

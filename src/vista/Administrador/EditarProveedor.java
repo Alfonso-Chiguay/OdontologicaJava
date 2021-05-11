@@ -2,8 +2,7 @@ package vista.Administrador;
 import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
-import vista.Administrador.AdmCliente;
-import vista.Administrador.AdmProveedor;
+
 
 public class EditarProveedor extends javax.swing.JFrame {
 
@@ -49,12 +48,13 @@ public class EditarProveedor extends javax.swing.JFrame {
         btn_admEmpresa = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_Prov = new javax.swing.JTable();
         btn_editarProv = new javax.swing.JButton();
         btn_cancelProv = new javax.swing.JButton();
         btn_elimProv = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        btn_buscarProv = new javax.swing.JTextField();
+        btn_buscarRutProv2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
@@ -119,6 +119,11 @@ public class EditarProveedor extends javax.swing.JFrame {
         btn_ordenPedido.setText("Adm. Orden de pedido");
         btn_ordenPedido.setBorderPainted(false);
         btn_ordenPedido.setFocusPainted(false);
+        btn_ordenPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordenPedidoActionPerformed(evt);
+            }
+        });
 
         btn_admBoleta.setBackground(new java.awt.Color(12, 140, 153));
         btn_admBoleta.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -190,10 +195,10 @@ public class EditarProveedor extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
 
-        jTable1.setBackground(new java.awt.Color(240, 240, 240));
-        jTable1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(240, 240, 240));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_Prov.setBackground(new java.awt.Color(240, 240, 240));
+        tbl_Prov.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        tbl_Prov.setForeground(new java.awt.Color(240, 240, 240));
+        tbl_Prov.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -210,7 +215,7 @@ public class EditarProveedor extends javax.swing.JFrame {
                 "Rut ", "Razón social", "Dirección ", "Correo electronico", "Telefono", "Rubro"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_Prov);
 
         btn_editarProv.setBackground(new java.awt.Color(17, 175, 191));
         btn_editarProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -244,9 +249,16 @@ public class EditarProveedor extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Buscar proveedor por rut");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        btn_buscarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                btn_buscarProvActionPerformed(evt);
+            }
+        });
+
+        btn_buscarRutProv2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Buscar (3).png"))); // NOI18N
+        btn_buscarRutProv2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarRutProv2ActionPerformed(evt);
             }
         });
 
@@ -257,36 +269,45 @@ public class EditarProveedor extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(492, 492, 492)
+                        .addGap(485, 485, 485)
                         .addComponent(btn_editarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btn_elimProv)
-                        .addGap(30, 30, 30)
+                        .addGap(38, 38, 38)
+                        .addComponent(btn_elimProv, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
                         .addComponent(btn_cancelProv))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(189, 189, 189)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btn_buscarProv, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_buscarRutProv2)))))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_editarProv)
-                    .addComponent(btn_elimProv)
-                    .addComponent(btn_cancelProv))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_buscarRutProv2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_buscarProv))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(254, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_editarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_elimProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_cancelProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(174, 174, 174))))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -398,15 +419,25 @@ public class EditarProveedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_elimProvActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void btn_buscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarProvActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_btn_buscarProvActionPerformed
 
     private void btn_cancelProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelProvActionPerformed
         AdmProveedor ventanaProveedor = new AdmProveedor(username);
         ventanaProveedor.setVisible(true);
         this.dispose();        
     }//GEN-LAST:event_btn_cancelProvActionPerformed
+
+    private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
+        this.dispose();
+        AdmOrden ventana = new AdmOrden(username);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_btn_ordenPedidoActionPerformed
+
+    private void btn_buscarRutProv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarRutProv2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_buscarRutProv2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -452,6 +483,8 @@ public class EditarProveedor extends javax.swing.JFrame {
     private javax.swing.JButton btn_admEmpleado;
     private javax.swing.JButton btn_admEmpresa;
     private javax.swing.JButton btn_admProveedor;
+    private javax.swing.JTextField btn_buscarProv;
+    private javax.swing.JButton btn_buscarRutProv2;
     private javax.swing.JButton btn_cancelProv;
     private javax.swing.JButton btn_editarProv;
     private javax.swing.JButton btn_elimProv;
@@ -467,8 +500,7 @@ public class EditarProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_usuario;
+    private javax.swing.JTable tbl_Prov;
     // End of variables declaration//GEN-END:variables
 }

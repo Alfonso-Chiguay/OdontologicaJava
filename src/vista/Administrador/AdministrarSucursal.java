@@ -4,15 +4,15 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 
 
-public class AdmOrden extends javax.swing.JFrame {
+public class AdministrarSucursal extends javax.swing.JFrame {
 
-    public AdmOrden() {
+    public AdministrarSucursal() {
         initComponents();
         
     }
     public String username = "";
     
-    public AdmOrden(String usuario) {
+    public AdministrarSucursal(String usuario) {
         initComponents();
         username = usuario;
         //Caracteristicas de la ventana
@@ -27,6 +27,7 @@ public class AdmOrden extends javax.swing.JFrame {
         btn_admProveedor.setBackground(colorBotonTop.getBackground());
         btn_ordenPedido.setBackground(colorBotonTop.getBackground());
         btn_logout.setBackground(colorTop.getBackground());
+        
     }
 
 
@@ -43,12 +44,19 @@ public class AdmOrden extends javax.swing.JFrame {
         btn_admProveedor = new javax.swing.JButton();
         btn_ordenPedido = new javax.swing.JButton();
         btn_admBoleta = new javax.swing.JButton();
-        btn_admEmpleado = new javax.swing.JButton();
+        btn_admEmpleados = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btn_admEmpresa = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        btn_admOrden = new javax.swing.JButton();
-        btn_crearOrden = new javax.swing.JButton();
+        btn_nuevaSucursal = new javax.swing.JButton();
+        btn_EliminarSucursal = new javax.swing.JButton();
+        btn_verDetalles = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_sucursal = new javax.swing.JTable();
+        btn_editarSucursal = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
@@ -111,7 +119,7 @@ public class AdmOrden extends javax.swing.JFrame {
         btn_ordenPedido.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_ordenPedido.setForeground(new java.awt.Color(255, 255, 255));
         btn_ordenPedido.setText("Adm. Orden de pedido");
-        btn_ordenPedido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0), 3));
+        btn_ordenPedido.setBorderPainted(false);
         btn_ordenPedido.setFocusPainted(false);
         btn_ordenPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,15 +139,15 @@ public class AdmOrden extends javax.swing.JFrame {
             }
         });
 
-        btn_admEmpleado.setBackground(new java.awt.Color(12, 140, 153));
-        btn_admEmpleado.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_admEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        btn_admEmpleado.setText("Adm. Empleados");
-        btn_admEmpleado.setBorderPainted(false);
-        btn_admEmpleado.setFocusPainted(false);
-        btn_admEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        btn_admEmpleados.setBackground(new java.awt.Color(12, 140, 153));
+        btn_admEmpleados.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_admEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btn_admEmpleados.setText("Adm.Empleados");
+        btn_admEmpleados.setBorderPainted(false);
+        btn_admEmpleados.setFocusPainted(false);
+        btn_admEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_admEmpleadoActionPerformed(evt);
+                btn_admEmpleadosActionPerformed(evt);
             }
         });
 
@@ -154,7 +162,7 @@ public class AdmOrden extends javax.swing.JFrame {
         btn_admEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_admEmpresa.setForeground(new java.awt.Color(255, 255, 255));
         btn_admEmpresa.setText("Adm. Empresa");
-        btn_admEmpresa.setBorderPainted(false);
+        btn_admEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0), 3));
         btn_admEmpresa.setFocusPainted(false);
         btn_admEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,11 +183,11 @@ public class AdmOrden extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btn_admBoleta)
                 .addGap(0, 0, 0)
-                .addComponent(btn_admEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_admEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_admEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         colorBotonTopLayout.setVerticalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,59 +196,100 @@ public class AdmOrden extends javax.swing.JFrame {
             .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admBoleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_admEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_admEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
 
-        btn_admOrden.setBackground(new java.awt.Color(12, 140, 153));
-        btn_admOrden.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btn_admOrden.setForeground(new java.awt.Color(255, 255, 255));
-        btn_admOrden.setText("Adminitrar orden de pedido");
-        btn_admOrden.setActionCommand("");
-        btn_admOrden.setAutoscrolls(true);
-        btn_admOrden.setBorderPainted(false);
-        btn_admOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_admOrden.addActionListener(new java.awt.event.ActionListener() {
+        btn_nuevaSucursal.setBackground(new java.awt.Color(0, 102, 0));
+        btn_nuevaSucursal.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_nuevaSucursal.setForeground(new java.awt.Color(240, 240, 240));
+        btn_nuevaSucursal.setText("Crear nueva sucursal");
+
+        btn_EliminarSucursal.setBackground(new java.awt.Color(204, 0, 0));
+        btn_EliminarSucursal.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_EliminarSucursal.setForeground(new java.awt.Color(255, 255, 255));
+        btn_EliminarSucursal.setText("Eliminar");
+
+        btn_verDetalles.setBackground(new java.awt.Color(17, 175, 191));
+        btn_verDetalles.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_verDetalles.setForeground(new java.awt.Color(255, 255, 255));
+        btn_verDetalles.setText("Ver detalles");
+        btn_verDetalles.setBorderPainted(false);
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Sucursal");
+
+        tbl_sucursal.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Encargado", "Dirrección"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_sucursal);
+
+        btn_editarSucursal.setBackground(new java.awt.Color(0, 102, 0));
+        btn_editarSucursal.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_editarSucursal.setForeground(new java.awt.Color(240, 240, 240));
+        btn_editarSucursal.setText("Editar sucursal");
+        btn_editarSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_admOrdenActionPerformed(evt);
+                btn_editarSucursalActionPerformed(evt);
             }
         });
 
-        btn_crearOrden.setBackground(new java.awt.Color(12, 140, 153));
-        btn_crearOrden.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btn_crearOrden.setForeground(new java.awt.Color(255, 255, 255));
-        btn_crearOrden.setText("Nueva orden de pedido");
-        btn_crearOrden.setActionCommand("");
-        btn_crearOrden.setAutoscrolls(true);
-        btn_crearOrden.setBorderPainted(false);
-        btn_crearOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_crearOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_crearOrdenActionPerformed(evt);
-            }
-        });
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Buscar (3).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(454, 454, 454)
+                .addGap(114, 114, 114)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_crearOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_admOrden))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_nuevaSucursal)
+                        .addGap(56, 56, 56)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_verDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(btn_EliminarSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_editarSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(480, 480, 480))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
-                .addComponent(btn_crearOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(btn_admOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_nuevaSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_editarSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btn_verDetalles, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(btn_EliminarSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(304, 304, 304))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -321,7 +370,7 @@ public class AdmOrden extends javax.swing.JFrame {
     private void btn_admClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admClienteActionPerformed
         AdmCliente ventanaCliente = new AdmCliente(username);
         ventanaCliente.setVisible(true);
-        this.dispose();  
+        this.dispose();
     }//GEN-LAST:event_btn_admClienteActionPerformed
 
     private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
@@ -329,9 +378,9 @@ public class AdmOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_regCliente1ActionPerformed
 
     private void btn_admProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admProveedorActionPerformed
-        this.dispose();
         AdmProveedor ventanaProveedor = new AdmProveedor(username);
         ventanaProveedor.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admProveedorActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
@@ -340,31 +389,22 @@ public class AdmOrden extends javax.swing.JFrame {
         ventanaLogin.setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void btn_admEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpleadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_admEmpleadoActionPerformed
+    private void btn_admEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpleadosActionPerformed
+        this.dispose();
+        AdmEmpleados ventanaEmpleados = new AdmEmpleados(username);
+        ventanaEmpleados.setVisible(true);          
+    }//GEN-LAST:event_btn_admEmpleadosActionPerformed
 
     private void btn_admEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpresaActionPerformed
-        // TODO add your handling code here:
+        AdmEmpresa ventanaEmpresa = new AdmEmpresa(username);
+        ventanaEmpresa.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admEmpresaActionPerformed
-        // Botón Aprobar y/o Rechazar
-    private void btn_admOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admOrdenActionPerformed
-        this.dispose();
-        AprobOrden ventana = new AprobOrden(username);
-        ventana.setVisible(true);
-    }//GEN-LAST:event_btn_admOrdenActionPerformed
 
-    private void btn_crearOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearOrdenActionPerformed
-        this.dispose();
-        CrearOrden ventana = new CrearOrden(username);
-        ventana.setVisible(true);
-        
-    }//GEN-LAST:event_btn_crearOrdenActionPerformed
-    //Botón del menu principal
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
+        AdmOrden ventanaOrden = new AdmOrden(username);
+        ventanaOrden.setVisible(true);
         this.dispose();
-        AdmOrden ventana = new AdmOrden(username);
-        ventana.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     private void btn_admBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admBoletaActionPerformed
@@ -372,6 +412,12 @@ public class AdmOrden extends javax.swing.JFrame {
         AdmBoleta ventanaBoleta = new AdmBoleta(username);
         ventanaBoleta.setVisible(true);
     }//GEN-LAST:event_btn_admBoletaActionPerformed
+
+    private void btn_editarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarSucursalActionPerformed
+        this.dispose();
+        EditarSucursal ventanaSucursal = new EditarSucursal(username);
+        ventanaSucursal.setVisible(true);
+    }//GEN-LAST:event_btn_editarSucursalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,14 +436,18 @@ public class AdmOrden extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdmOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdministrarSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdmOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdministrarSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdmOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdministrarSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdmOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdministrarSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -406,29 +456,36 @@ public class AdmOrden extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdmOrden().setVisible(true);
+                new AdministrarSucursal().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_EliminarSucursal;
     private javax.swing.JButton btn_admBoleta;
     private javax.swing.JButton btn_admCliente;
-    private javax.swing.JButton btn_admEmpleado;
+    private javax.swing.JButton btn_admEmpleados;
     private javax.swing.JButton btn_admEmpresa;
-    private javax.swing.JButton btn_admOrden;
     private javax.swing.JButton btn_admProveedor;
-    private javax.swing.JButton btn_crearOrden;
+    private javax.swing.JButton btn_editarSucursal;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_nuevaSucursal;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_resHora1;
+    private javax.swing.JButton btn_verDetalles;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_usuario;
+    private javax.swing.JTable tbl_sucursal;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,15 +4,15 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 
 
-public class AdmOrden extends javax.swing.JFrame {
+public class EditarSucursal extends javax.swing.JFrame {
 
-    public AdmOrden() {
+    public EditarSucursal() {
         initComponents();
         
     }
     public String username = "";
     
-    public AdmOrden(String usuario) {
+    public EditarSucursal(String usuario) {
         initComponents();
         username = usuario;
         //Caracteristicas de la ventana
@@ -27,6 +27,7 @@ public class AdmOrden extends javax.swing.JFrame {
         btn_admProveedor.setBackground(colorBotonTop.getBackground());
         btn_ordenPedido.setBackground(colorBotonTop.getBackground());
         btn_logout.setBackground(colorTop.getBackground());
+        
     }
 
 
@@ -43,12 +44,20 @@ public class AdmOrden extends javax.swing.JFrame {
         btn_admProveedor = new javax.swing.JButton();
         btn_ordenPedido = new javax.swing.JButton();
         btn_admBoleta = new javax.swing.JButton();
-        btn_admEmpleado = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_admEmpleados = new javax.swing.JButton();
+        btn_informes = new javax.swing.JButton();
         btn_admEmpresa = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        btn_admOrden = new javax.swing.JButton();
-        btn_crearOrden = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        btn_guarCambSucu = new javax.swing.JButton();
+        btn_VolverSucursal = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
@@ -111,7 +120,7 @@ public class AdmOrden extends javax.swing.JFrame {
         btn_ordenPedido.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_ordenPedido.setForeground(new java.awt.Color(255, 255, 255));
         btn_ordenPedido.setText("Adm. Orden de pedido");
-        btn_ordenPedido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0), 3));
+        btn_ordenPedido.setBorderPainted(false);
         btn_ordenPedido.setFocusPainted(false);
         btn_ordenPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,30 +140,30 @@ public class AdmOrden extends javax.swing.JFrame {
             }
         });
 
-        btn_admEmpleado.setBackground(new java.awt.Color(12, 140, 153));
-        btn_admEmpleado.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_admEmpleado.setForeground(new java.awt.Color(255, 255, 255));
-        btn_admEmpleado.setText("Adm. Empleados");
-        btn_admEmpleado.setBorderPainted(false);
-        btn_admEmpleado.setFocusPainted(false);
-        btn_admEmpleado.addActionListener(new java.awt.event.ActionListener() {
+        btn_admEmpleados.setBackground(new java.awt.Color(12, 140, 153));
+        btn_admEmpleados.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_admEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        btn_admEmpleados.setText("Adm.Empleados");
+        btn_admEmpleados.setBorderPainted(false);
+        btn_admEmpleados.setFocusPainted(false);
+        btn_admEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_admEmpleadoActionPerformed(evt);
+                btn_admEmpleadosActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(12, 140, 153));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Informes");
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
+        btn_informes.setBackground(new java.awt.Color(12, 140, 153));
+        btn_informes.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_informes.setForeground(new java.awt.Color(255, 255, 255));
+        btn_informes.setText("Informes");
+        btn_informes.setBorderPainted(false);
+        btn_informes.setFocusPainted(false);
 
         btn_admEmpresa.setBackground(new java.awt.Color(12, 140, 153));
         btn_admEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_admEmpresa.setForeground(new java.awt.Color(255, 255, 255));
         btn_admEmpresa.setText("Adm. Empresa");
-        btn_admEmpresa.setBorderPainted(false);
+        btn_admEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0), 3));
         btn_admEmpresa.setFocusPainted(false);
         btn_admEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,72 +184,133 @@ public class AdmOrden extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btn_admBoleta)
                 .addGap(0, 0, 0)
-                .addComponent(btn_admEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_admEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_admEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                .addComponent(btn_informes, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
         );
         colorBotonTopLayout.setVerticalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_admCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
             .addComponent(btn_admProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_informes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admBoleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_admEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_admEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
 
-        btn_admOrden.setBackground(new java.awt.Color(12, 140, 153));
-        btn_admOrden.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btn_admOrden.setForeground(new java.awt.Color(255, 255, 255));
-        btn_admOrden.setText("Adminitrar orden de pedido");
-        btn_admOrden.setActionCommand("");
-        btn_admOrden.setAutoscrolls(true);
-        btn_admOrden.setBorderPainted(false);
-        btn_admOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_admOrden.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(181, 213, 212));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel6.setText("Encargado");
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel7.setText("Dirección");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(137, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
+        btn_guarCambSucu.setBackground(new java.awt.Color(0, 102, 0));
+        btn_guarCambSucu.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_guarCambSucu.setForeground(new java.awt.Color(240, 240, 240));
+        btn_guarCambSucu.setText("Guardar cambios");
+
+        btn_VolverSucursal.setBackground(new java.awt.Color(204, 0, 0));
+        btn_VolverSucursal.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_VolverSucursal.setForeground(new java.awt.Color(255, 255, 255));
+        btn_VolverSucursal.setText("Volver");
+        btn_VolverSucursal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_admOrdenActionPerformed(evt);
+                btn_VolverSucursalActionPerformed(evt);
             }
         });
 
-        btn_crearOrden.setBackground(new java.awt.Color(12, 140, 153));
-        btn_crearOrden.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btn_crearOrden.setForeground(new java.awt.Color(255, 255, 255));
-        btn_crearOrden.setText("Nueva orden de pedido");
-        btn_crearOrden.setActionCommand("");
-        btn_crearOrden.setAutoscrolls(true);
-        btn_crearOrden.setBorderPainted(false);
-        btn_crearOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_crearOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_crearOrdenActionPerformed(evt);
-            }
-        });
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel8.setText("Datos empresa");
+
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel9.setText("Editar información sucursal");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(454, 454, 454)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_crearOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_admOrden))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_VolverSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(423, 423, 423)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_guarCambSucu)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(164, 164, 164))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(480, 480, 480)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
-                .addComponent(btn_crearOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(btn_admOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_VolverSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(btn_guarCambSucu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -321,7 +391,7 @@ public class AdmOrden extends javax.swing.JFrame {
     private void btn_admClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admClienteActionPerformed
         AdmCliente ventanaCliente = new AdmCliente(username);
         ventanaCliente.setVisible(true);
-        this.dispose();  
+        this.dispose();
     }//GEN-LAST:event_btn_admClienteActionPerformed
 
     private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
@@ -329,9 +399,9 @@ public class AdmOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_regCliente1ActionPerformed
 
     private void btn_admProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admProveedorActionPerformed
-        this.dispose();
         AdmProveedor ventanaProveedor = new AdmProveedor(username);
         ventanaProveedor.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admProveedorActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
@@ -340,31 +410,22 @@ public class AdmOrden extends javax.swing.JFrame {
         ventanaLogin.setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void btn_admEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpleadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_admEmpleadoActionPerformed
+    private void btn_admEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpleadosActionPerformed
+        this.dispose();
+        AdmEmpleados ventanaEmpleados = new AdmEmpleados(username);
+        ventanaEmpleados.setVisible(true);          
+    }//GEN-LAST:event_btn_admEmpleadosActionPerformed
 
     private void btn_admEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpresaActionPerformed
-        // TODO add your handling code here:
+        AdmEmpresa ventanaEmpresa = new AdmEmpresa(username);
+        ventanaEmpresa.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admEmpresaActionPerformed
-        // Botón Aprobar y/o Rechazar
-    private void btn_admOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admOrdenActionPerformed
-        this.dispose();
-        AprobOrden ventana = new AprobOrden(username);
-        ventana.setVisible(true);
-    }//GEN-LAST:event_btn_admOrdenActionPerformed
 
-    private void btn_crearOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearOrdenActionPerformed
-        this.dispose();
-        CrearOrden ventana = new CrearOrden(username);
-        ventana.setVisible(true);
-        
-    }//GEN-LAST:event_btn_crearOrdenActionPerformed
-    //Botón del menu principal
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
+        AdmOrden ventanaOrden = new AdmOrden(username);
+        ventanaOrden.setVisible(true);
         this.dispose();
-        AdmOrden ventana = new AdmOrden(username);
-        ventana.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     private void btn_admBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admBoletaActionPerformed
@@ -372,6 +433,12 @@ public class AdmOrden extends javax.swing.JFrame {
         AdmBoleta ventanaBoleta = new AdmBoleta(username);
         ventanaBoleta.setVisible(true);
     }//GEN-LAST:event_btn_admBoletaActionPerformed
+
+    private void btn_VolverSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_VolverSucursalActionPerformed
+        this.dispose();
+        AdministrarSucursal ventanaSucursal = new AdministrarSucursal(username);
+        ventanaSucursal.setVisible(true);       // TODO add your handling code here:
+    }//GEN-LAST:event_btn_VolverSucursalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,13 +457,13 @@ public class AdmOrden extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdmOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdmOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdmOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdmOrden.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -406,29 +473,37 @@ public class AdmOrden extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdmOrden().setVisible(true);
+                new EditarSucursal().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_VolverSucursal;
     private javax.swing.JButton btn_admBoleta;
     private javax.swing.JButton btn_admCliente;
-    private javax.swing.JButton btn_admEmpleado;
+    private javax.swing.JButton btn_admEmpleados;
     private javax.swing.JButton btn_admEmpresa;
-    private javax.swing.JButton btn_admOrden;
     private javax.swing.JButton btn_admProveedor;
-    private javax.swing.JButton btn_crearOrden;
+    private javax.swing.JButton btn_guarCambSucu;
+    private javax.swing.JButton btn_informes;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_resHora1;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lbl_usuario;
     // End of variables declaration//GEN-END:variables
 }

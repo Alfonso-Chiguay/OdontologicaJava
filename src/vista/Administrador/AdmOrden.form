@@ -262,6 +262,9 @@
                 <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_admBoletaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_admEmpleado">
               <Properties>

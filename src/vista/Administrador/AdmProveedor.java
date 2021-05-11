@@ -126,6 +126,11 @@ public class AdmProveedor extends javax.swing.JFrame {
         btn_admBoleta.setText("Adm. Boleta de servicio");
         btn_admBoleta.setBorderPainted(false);
         btn_admBoleta.setFocusPainted(false);
+        btn_admBoleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_admBoletaActionPerformed(evt);
+            }
+        });
 
         btn_admEmpleado.setBackground(new java.awt.Color(12, 140, 153));
         btn_admEmpleado.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -312,7 +317,9 @@ public class AdmProveedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_admClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admClienteActionPerformed
-      
+        AdmCliente ventanaCliente = new AdmCliente(username);
+        ventanaCliente.setVisible(true);
+        this.dispose();      
     }//GEN-LAST:event_btn_admClienteActionPerformed
 
     private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
@@ -358,6 +365,12 @@ public class AdmProveedor extends javax.swing.JFrame {
         AdmOrden ventana = new AdmOrden(username);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
+
+    private void btn_admBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admBoletaActionPerformed
+        this.dispose();
+        AdmBoleta ventanaBoleta = new AdmBoleta(username);
+        ventanaBoleta.setVisible(true);
+    }//GEN-LAST:event_btn_admBoletaActionPerformed
 
     /**
      * @param args the command line arguments
