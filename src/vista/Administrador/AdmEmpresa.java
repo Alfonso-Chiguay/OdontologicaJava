@@ -202,7 +202,7 @@ public class AdmEmpresa extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
 
         btn_editarEmpresa.setBackground(new java.awt.Color(17, 175, 191));
-        btn_editarEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_editarEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         btn_editarEmpresa.setForeground(new java.awt.Color(255, 255, 255));
         btn_editarEmpresa.setText("Editar información empresa");
         btn_editarEmpresa.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +212,7 @@ public class AdmEmpresa extends javax.swing.JFrame {
         });
 
         btn_adminSucursal.setBackground(new java.awt.Color(17, 175, 191));
-        btn_adminSucursal.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_adminSucursal.setFont(new java.awt.Font("Times New Roman", 1, 21)); // NOI18N
         btn_adminSucursal.setForeground(new java.awt.Color(255, 255, 255));
         btn_adminSucursal.setText("Administrar Sucursal");
         btn_adminSucursal.addActionListener(new java.awt.event.ActionListener() {
@@ -235,11 +235,11 @@ public class AdmEmpresa extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(btn_editarEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(btn_adminSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(281, Short.MAX_VALUE))
+                .addGap(76, 76, 76)
+                .addComponent(btn_editarEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(btn_adminSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N

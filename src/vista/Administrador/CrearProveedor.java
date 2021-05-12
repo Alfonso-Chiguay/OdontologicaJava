@@ -61,7 +61,7 @@ public class CrearProveedor extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        btn_buscarRutProv = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         btn_crearProv = new javax.swing.JButton();
         btn_limpiarProv = new javax.swing.JButton();
         btn_cancelProv = new javax.swing.JButton();
@@ -206,7 +206,7 @@ public class CrearProveedor extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
 
         jPanel1.setBackground(new java.awt.Color(181, 213, 212));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos Proveedor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -266,10 +266,10 @@ public class CrearProveedor extends javax.swing.JFrame {
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ortodoncia ", "Laborario", "Implantologia", " " }));
 
-        btn_buscarRutProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Buscar (3).png"))); // NOI18N
-        btn_buscarRutProv.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchicon.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarRutProvActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -299,8 +299,8 @@ public class CrearProveedor extends javax.swing.JFrame {
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(btn_buscarRutProv)))
+                                .addGap(37, 37, 37)
+                                .addComponent(jButton2)))
                         .addGap(0, 170, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -309,9 +309,9 @@ public class CrearProveedor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_buscarRutProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -379,12 +379,12 @@ public class CrearProveedor extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_crearProv)
-                    .addComponent(btn_limpiarProv)
-                    .addComponent(btn_cancelProv))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(btn_crearProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_limpiarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cancelProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -525,9 +525,9 @@ public class CrearProveedor extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
-    private void btn_buscarRutProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarRutProvActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_buscarRutProvActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -573,7 +573,6 @@ public class CrearProveedor extends javax.swing.JFrame {
     private javax.swing.JButton btn_admEmpleado;
     private javax.swing.JButton btn_admEmpresa;
     private javax.swing.JButton btn_admProveedor;
-    private javax.swing.JButton btn_buscarRutProv;
     private javax.swing.JButton btn_cancelProv;
     private javax.swing.JButton btn_crearProv;
     private javax.swing.JButton btn_limpiarProv;
@@ -584,6 +583,7 @@ public class CrearProveedor extends javax.swing.JFrame {
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

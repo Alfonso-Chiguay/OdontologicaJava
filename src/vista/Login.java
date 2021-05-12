@@ -159,8 +159,8 @@ public class Login extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
 
             this.dispose();
-            //MainAdministrador ventanaAdmin = new MainAdministrador("caro");
-            //ventanaAdmin.setVisible(true);
+           // MainAdministrador ventanaAdmin = new MainAdministrador("caro");
+           // ventanaAdmin.setVisible(true);
             MainEmpleado ventanaEmpleado = new MainEmpleado("Usuario");
             ventanaEmpleado.setVisible(true);
             

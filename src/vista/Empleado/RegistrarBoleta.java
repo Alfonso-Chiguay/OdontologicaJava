@@ -1,23 +1,20 @@
-package vista;
+package vista.Empleado;
+import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
-import vista.Empleado.RegistrarBoleta;
-import vista.Empleado.RegistrarCliente;
-import vista.Empleado.RegistrarInforme;
-import vista.Empleado.RegistroProv;
-import vista.Empleado.ReservaHora;
-import vista.Empleado.RegistrarOrden;
 
 
-public class MainEmpleado extends javax.swing.JFrame {
 
 
-    public MainEmpleado() {
+public class RegistrarBoleta extends javax.swing.JFrame {
+
+
+    public RegistrarBoleta() {
         initComponents();
     }
    public String username;
    
-   public MainEmpleado(String usuario) {
+   public RegistrarBoleta(String usuario) {
         initComponents();
         username=usuario;
         //Caracteristicas de la ventana
@@ -31,7 +28,6 @@ public class MainEmpleado extends javax.swing.JFrame {
         btn_regCliente.setBackground(colorBotonTop.getBackground());
         btn_resHora.setBackground(colorBotonTop.getBackground());
         btn_regProveedor.setBackground(colorBotonTop.getBackground());
-        btn_informe.setBackground(colorBotonTop.getBackground());
         btn_logout.setBackground(colorTop.getBackground());
     }
 
@@ -46,6 +42,12 @@ public class MainEmpleado extends javax.swing.JFrame {
 
         btn_regCliente1 = new javax.swing.JButton();
         btn_resHora1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_servicioBol = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         colorTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         colorBotonTop = new javax.swing.JPanel();
@@ -56,6 +58,8 @@ public class MainEmpleado extends javax.swing.JFrame {
         btn_genBolServicio = new javax.swing.JButton();
         btn_informe = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        btn_CrearRegBoleta = new javax.swing.JButton();
+        btn_anulaRegBol = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
@@ -79,8 +83,61 @@ public class MainEmpleado extends javax.swing.JFrame {
         btn_resHora1.setBorderPainted(false);
         btn_resHora1.setFocusPainted(false);
 
+        jPanel2.setBackground(new java.awt.Color(181, 213, 212));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        tbl_servicioBol.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        tbl_servicioBol.setForeground(new java.awt.Color(240, 240, 240));
+        tbl_servicioBol.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Fecha", "Hora", "Especialista", "Especialidad", "Costo"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_servicioBol);
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel10.setText("Servicio realizado Fecha/Hora");
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 74, Short.MAX_VALUE))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1270, 720));
         setMinimumSize(new java.awt.Dimension(1270, 720));
 
         colorTop.setBackground(new java.awt.Color(17, 175, 191));
@@ -143,8 +200,7 @@ public class MainEmpleado extends javax.swing.JFrame {
         btn_genBolServicio.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_genBolServicio.setForeground(new java.awt.Color(255, 255, 255));
         btn_genBolServicio.setText("Generar boleta de servicio");
-        btn_genBolServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btn_genBolServicio.setBorderPainted(false);
+        btn_genBolServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 0)));
         btn_genBolServicio.setFocusPainted(false);
         btn_genBolServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,15 +247,53 @@ public class MainEmpleado extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
 
+        btn_CrearRegBoleta.setBackground(new java.awt.Color(12, 140, 153));
+        btn_CrearRegBoleta.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btn_CrearRegBoleta.setForeground(new java.awt.Color(255, 255, 255));
+        btn_CrearRegBoleta.setText("Generar boleta de servicio");
+        btn_CrearRegBoleta.setActionCommand("");
+        btn_CrearRegBoleta.setAutoscrolls(true);
+        btn_CrearRegBoleta.setBorderPainted(false);
+        btn_CrearRegBoleta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_CrearRegBoleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CrearRegBoletaActionPerformed(evt);
+            }
+        });
+
+        btn_anulaRegBol.setBackground(new java.awt.Color(12, 140, 153));
+        btn_anulaRegBol.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btn_anulaRegBol.setForeground(new java.awt.Color(255, 255, 255));
+        btn_anulaRegBol.setText("Anular / Buscar ");
+        btn_anulaRegBol.setActionCommand("");
+        btn_anulaRegBol.setAutoscrolls(true);
+        btn_anulaRegBol.setBorderPainted(false);
+        btn_anulaRegBol.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_anulaRegBol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_anulaRegBolActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(500, 500, 500)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_anulaRegBol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_CrearRegBoleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(492, 492, 492))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(171, 171, 171)
+                .addComponent(btn_CrearRegBoleta, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(btn_anulaRegBol, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -225,7 +319,9 @@ public class MainEmpleado extends javax.swing.JFrame {
         colorTopLayout.setHorizontalGroup(
             colorTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(colorBotonTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(colorTopLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel3)
                 .addGroup(colorTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(colorTopLayout.createSequentialGroup()
@@ -238,7 +334,6 @@ public class MainEmpleado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_logout)
                         .addContainerGap())))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         colorTopLayout.setVerticalGroup(
             colorTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,8 +353,7 @@ public class MainEmpleado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(colorBotonTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -317,6 +411,18 @@ public class MainEmpleado extends javax.swing.JFrame {
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
+    private void btn_CrearRegBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearRegBoletaActionPerformed
+        this.dispose();
+        CrearRegistroBoleta ventanaCrearBol = new CrearRegistroBoleta(username);
+        ventanaCrearBol.setVisible(true);
+    }//GEN-LAST:event_btn_CrearRegBoletaActionPerformed
+
+    private void btn_anulaRegBolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anulaRegBolActionPerformed
+        this.dispose();
+        AnularBuscarBol ventanaAnularBol = new  AnularBuscarBol(username);
+        ventanaAnularBol.setVisible(true);
+    }//GEN-LAST:event_btn_anulaRegBolActionPerformed
+
     private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
         this.dispose();
         RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(username);
@@ -340,25 +446,28 @@ public class MainEmpleado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarBoleta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarBoleta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarBoleta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrarBoleta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainEmpleado().setVisible(true);
+                new RegistrarBoleta().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_CrearRegBoleta;
+    private javax.swing.JButton btn_anulaRegBol;
     private javax.swing.JButton btn_genBolServicio;
     private javax.swing.JButton btn_informe;
     private javax.swing.JButton btn_logout;
@@ -370,9 +479,15 @@ public class MainEmpleado extends javax.swing.JFrame {
     private javax.swing.JButton btn_resHora1;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_usuario;
+    private javax.swing.JTable tbl_servicioBol;
     // End of variables declaration//GEN-END:variables
 }

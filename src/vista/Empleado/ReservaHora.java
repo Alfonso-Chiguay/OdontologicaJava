@@ -5,7 +5,7 @@ import vista.*;
 import java.awt.Toolkit;
 import java.util.Calendar;
 import javax.swing.SwingConstants;
-import vista.Empleado.RegistrarCliente;
+
 
 public class ReservaHora extends javax.swing.JFrame {
 
@@ -63,6 +63,7 @@ public class ReservaHora extends javax.swing.JFrame {
         btn_regProveedor = new javax.swing.JButton();
         btn_ordenPedido = new javax.swing.JButton();
         btn_genBolServicio = new javax.swing.JButton();
+        btn_informe = new javax.swing.JButton();
         colorBody = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -167,6 +168,11 @@ public class ReservaHora extends javax.swing.JFrame {
         btn_regProveedor.setText("Registro proveedor");
         btn_regProveedor.setBorderPainted(false);
         btn_regProveedor.setFocusPainted(false);
+        btn_regProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_regProveedorActionPerformed(evt);
+            }
+        });
 
         btn_ordenPedido.setBackground(new java.awt.Color(12, 140, 153));
         btn_ordenPedido.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -174,6 +180,11 @@ public class ReservaHora extends javax.swing.JFrame {
         btn_ordenPedido.setText("Orden de pedido");
         btn_ordenPedido.setBorderPainted(false);
         btn_ordenPedido.setFocusPainted(false);
+        btn_ordenPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordenPedidoActionPerformed(evt);
+            }
+        });
 
         btn_genBolServicio.setBackground(new java.awt.Color(12, 140, 153));
         btn_genBolServicio.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -181,6 +192,23 @@ public class ReservaHora extends javax.swing.JFrame {
         btn_genBolServicio.setText("Generar boleta de servicio");
         btn_genBolServicio.setBorderPainted(false);
         btn_genBolServicio.setFocusPainted(false);
+        btn_genBolServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_genBolServicioActionPerformed(evt);
+            }
+        });
+
+        btn_informe.setBackground(new java.awt.Color(12, 140, 153));
+        btn_informe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_informe.setForeground(new java.awt.Color(255, 255, 255));
+        btn_informe.setText("Informe");
+        btn_informe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_informe.setBorderPainted(false);
+        btn_informe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_informeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout colorBotonTopLayout = new javax.swing.GroupLayout(colorBotonTop);
         colorBotonTop.setLayout(colorBotonTopLayout);
@@ -193,10 +221,11 @@ public class ReservaHora extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btn_regProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_ordenPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_genBolServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(btn_informe, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         colorBotonTopLayout.setVerticalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,6 +234,7 @@ public class ReservaHora extends javax.swing.JFrame {
             .addComponent(btn_regProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_genBolServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_informe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         colorBody.setBackground(new java.awt.Color(181, 213, 212));
@@ -423,7 +453,6 @@ public class ReservaHora extends javax.swing.JFrame {
     date_picker.setCalendarBackground(new java.awt.Color(0, 153, 153));
     date_picker.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 1));
     date_picker.setWeekStyle(datechooser.view.WeekDaysStyle.SHORT);
-    date_picker.setLocale(new java.util.Locale("es", "CL", ""));
     date_picker.setNavigateFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 14));
     date_picker.setCurrentNavigateIndex(1);
     date_picker.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_PERIOD);
@@ -530,7 +559,7 @@ public class ReservaHora extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(43, 43, 43)
             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(101, Short.MAX_VALUE))
+            .addContainerGap(107, Short.MAX_VALUE))
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, colorBodyLayout.createSequentialGroup()
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reservar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -647,7 +676,9 @@ public class ReservaHora extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_regCliente1ActionPerformed
 
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        ReservaHora ventanaReshora = new ReservaHora(username);
+        ventanaReshora.setVisible(true); 
     }//GEN-LAST:event_btn_resHoraActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
@@ -684,6 +715,28 @@ public class ReservaHora extends javax.swing.JFrame {
         ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
+        this.dispose();
+        RegistroProv ventanaRegprov = new RegistroProv(username);
+        ventanaRegprov.setVisible(true);
+    }//GEN-LAST:event_btn_regProveedorActionPerformed
+
+    private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
+        this.dispose();
+        RegistrarOrden ventanaOrdenped = new RegistrarOrden(username);
+        ventanaOrdenped.setVisible(true);
+    }//GEN-LAST:event_btn_ordenPedidoActionPerformed
+
+    private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
+        this.dispose();
+        RegistrarInforme ventanaRegInfo = new RegistrarInforme(username);
+        ventanaRegInfo.setVisible(true);
+    }//GEN-LAST:event_btn_informeActionPerformed
+
+    private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -727,6 +780,7 @@ public class ReservaHora extends javax.swing.JFrame {
     private javax.swing.JButton btn_editEmail;
     private javax.swing.JButton btn_editTelefono;
     private javax.swing.JButton btn_genBolServicio;
+    private javax.swing.JButton btn_informe;
     private javax.swing.JButton btn_limpiarCampos;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;

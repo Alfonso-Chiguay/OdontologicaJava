@@ -1,23 +1,19 @@
-package vista;
+package vista.Empleado;
+import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
-import vista.Empleado.RegistrarBoleta;
-import vista.Empleado.RegistrarCliente;
-import vista.Empleado.RegistrarInforme;
-import vista.Empleado.RegistroProv;
-import vista.Empleado.ReservaHora;
-import vista.Empleado.RegistrarOrden;
 
 
-public class MainEmpleado extends javax.swing.JFrame {
+
+public class RegistroProv extends javax.swing.JFrame {
 
 
-    public MainEmpleado() {
+    public RegistroProv() {
         initComponents();
     }
    public String username;
    
-   public MainEmpleado(String usuario) {
+   public RegistroProv(String usuario) {
         initComponents();
         username=usuario;
         //Caracteristicas de la ventana
@@ -31,7 +27,6 @@ public class MainEmpleado extends javax.swing.JFrame {
         btn_regCliente.setBackground(colorBotonTop.getBackground());
         btn_resHora.setBackground(colorBotonTop.getBackground());
         btn_regProveedor.setBackground(colorBotonTop.getBackground());
-        btn_informe.setBackground(colorBotonTop.getBackground());
         btn_logout.setBackground(colorTop.getBackground());
     }
 
@@ -56,6 +51,8 @@ public class MainEmpleado extends javax.swing.JFrame {
         btn_genBolServicio = new javax.swing.JButton();
         btn_informe = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        btn_crearRegProv = new javax.swing.JButton();
+        btn_ediBusProv = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
@@ -80,7 +77,6 @@ public class MainEmpleado extends javax.swing.JFrame {
         btn_resHora1.setFocusPainted(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1270, 720));
         setMinimumSize(new java.awt.Dimension(1270, 720));
 
         colorTop.setBackground(new java.awt.Color(17, 175, 191));
@@ -119,7 +115,7 @@ public class MainEmpleado extends javax.swing.JFrame {
         btn_regProveedor.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_regProveedor.setForeground(new java.awt.Color(255, 255, 255));
         btn_regProveedor.setText("Registro proveedor");
-        btn_regProveedor.setBorderPainted(false);
+        btn_regProveedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 0), 3));
         btn_regProveedor.setFocusPainted(false);
         btn_regProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,15 +187,45 @@ public class MainEmpleado extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
 
+        btn_crearRegProv.setBackground(new java.awt.Color(17, 175, 191));
+        btn_crearRegProv.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btn_crearRegProv.setForeground(new java.awt.Color(255, 255, 255));
+        btn_crearRegProv.setText("Crear proveedor");
+        btn_crearRegProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearRegProvActionPerformed(evt);
+            }
+        });
+
+        btn_ediBusProv.setBackground(new java.awt.Color(17, 175, 191));
+        btn_ediBusProv.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btn_ediBusProv.setForeground(new java.awt.Color(255, 255, 255));
+        btn_ediBusProv.setText("Editar / Buscar");
+        btn_ediBusProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ediBusProvActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(565, 565, 565)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_ediBusProv, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_crearRegProv, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(btn_crearRegProv, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(btn_ediBusProv, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -323,6 +349,18 @@ public class MainEmpleado extends javax.swing.JFrame {
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
+    private void btn_crearRegProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearRegProvActionPerformed
+        this.dispose();
+        CrearRegistroProv ventanaRegProv = new  CrearRegistroProv(username);
+        ventanaRegProv.setVisible(true);
+    }//GEN-LAST:event_btn_crearRegProvActionPerformed
+
+    private void btn_ediBusProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ediBusProvActionPerformed
+        this.dispose();
+        EditarBuscarProv ventanaCrearRegProv = new  EditarBuscarProv(username);
+        ventanaCrearRegProv.setVisible(true);
+    }//GEN-LAST:event_btn_ediBusProvActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -340,25 +378,28 @@ public class MainEmpleado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistroProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainEmpleado().setVisible(true);
+                new RegistroProv().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_crearRegProv;
+    private javax.swing.JButton btn_ediBusProv;
     private javax.swing.JButton btn_genBolServicio;
     private javax.swing.JButton btn_informe;
     private javax.swing.JButton btn_logout;

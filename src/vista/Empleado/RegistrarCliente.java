@@ -53,6 +53,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
         btn_regProveedor = new javax.swing.JButton();
         btn_ordenPedido = new javax.swing.JButton();
         btn_genBolServicio = new javax.swing.JButton();
+        btn_informe = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -142,6 +143,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
         btn_regProveedor.setText("Registro proveedor");
         btn_regProveedor.setBorderPainted(false);
         btn_regProveedor.setFocusPainted(false);
+        btn_regProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_regProveedorActionPerformed(evt);
+            }
+        });
 
         btn_ordenPedido.setBackground(new java.awt.Color(12, 140, 153));
         btn_ordenPedido.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -149,6 +155,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
         btn_ordenPedido.setText("Orden de pedido");
         btn_ordenPedido.setBorderPainted(false);
         btn_ordenPedido.setFocusPainted(false);
+        btn_ordenPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordenPedidoActionPerformed(evt);
+            }
+        });
 
         btn_genBolServicio.setBackground(new java.awt.Color(12, 140, 153));
         btn_genBolServicio.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -156,22 +167,41 @@ public class RegistrarCliente extends javax.swing.JFrame {
         btn_genBolServicio.setText("Generar boleta de servicio");
         btn_genBolServicio.setBorderPainted(false);
         btn_genBolServicio.setFocusPainted(false);
+        btn_genBolServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_genBolServicioActionPerformed(evt);
+            }
+        });
+
+        btn_informe.setBackground(new java.awt.Color(12, 140, 153));
+        btn_informe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_informe.setForeground(new java.awt.Color(255, 255, 255));
+        btn_informe.setText("Informe");
+        btn_informe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btn_informe.setBorderPainted(false);
+        btn_informe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_informeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout colorBotonTopLayout = new javax.swing.GroupLayout(colorBotonTop);
         colorBotonTop.setLayout(colorBotonTopLayout);
         colorBotonTopLayout.setHorizontalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(colorBotonTopLayout.createSequentialGroup()
-                .addComponent(btn_regCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_regCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_resHora, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_resHora, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_regProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_regProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_ordenPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_ordenPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_genBolServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 282, Short.MAX_VALUE))
+                .addComponent(btn_genBolServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btn_informe, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         colorBotonTopLayout.setVerticalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,6 +209,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
             .addComponent(btn_resHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_regProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_informe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_genBolServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -393,11 +424,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(61, 61, 61)
                 .addComponent(btn_limpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(59, 59, 59)
                 .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(351, 351, 351))
+                .addGap(468, 468, 468))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,15 +524,19 @@ public class RegistrarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        RegistrarCliente ventanaRegistrar = new RegistrarCliente(username);
+        ventanaRegistrar.setVisible(true); 
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
     private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btn_regCliente1ActionPerformed
 
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        ReservaHora ventanaReshora = new ReservaHora(username);
+        ventanaReshora.setVisible(true);
     }//GEN-LAST:event_btn_resHoraActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
@@ -529,6 +564,30 @@ public class RegistrarCliente extends javax.swing.JFrame {
         ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
+        this.dispose();
+        RegistroProv ventanaRegprov = new RegistroProv(username);
+        ventanaRegprov.setVisible(true);
+    }//GEN-LAST:event_btn_regProveedorActionPerformed
+
+    private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
+        this.dispose();
+        RegistrarOrden ventanaOrdenped = new RegistrarOrden(username);
+        ventanaOrdenped.setVisible(true);
+    }//GEN-LAST:event_btn_ordenPedidoActionPerformed
+
+    private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
+        this.dispose();
+        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(username);
+        ventanaRegBol.setVisible(true);
+    }//GEN-LAST:event_btn_genBolServicioActionPerformed
+
+    private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
+        this.dispose();
+        RegistrarInforme ventanaRegInfo = new RegistrarInforme(username);
+        ventanaRegInfo.setVisible(true);
+    }//GEN-LAST:event_btn_informeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -570,6 +629,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_crear;
     private javax.swing.JButton btn_genBolServicio;
+    private javax.swing.JButton btn_informe;
     private javax.swing.JButton btn_limpiarCampos;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
