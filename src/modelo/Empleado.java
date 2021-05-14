@@ -9,6 +9,8 @@ public class Empleado {
     private Sucursal sucursal;
     private Cargo cargo;
     private Rol rol;
+    private String usuario;
+    private String contrasena;
     
     public Empleado(){
         this.id_emp = 0;
@@ -19,6 +21,8 @@ public class Empleado {
         this.sucursal=new Sucursal();
         this.cargo=new Cargo();
         this.rol=new Rol();
+        this.usuario="";
+        this.contrasena="";
     }
 
     public int getId_emp() {
@@ -84,6 +88,23 @@ public class Empleado {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
     
     @Override
     public String toString() {

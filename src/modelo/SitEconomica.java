@@ -35,5 +35,4 @@ public class SitEconomica {
         this.ingreso_max = ingreso_max;
     }
     
-    
 }

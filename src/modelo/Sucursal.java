@@ -11,8 +11,7 @@ public class Sucursal {
     public Sucursal(){
         this.id_sucursal=0;
         this.direccion="";
-        this.id_encargado=0;
-        this.empleado= new Empleado();
+        this.id_encargado=0;        
         this.empresa= new Empresa();
         this.comuna = new Comuna();
     }
