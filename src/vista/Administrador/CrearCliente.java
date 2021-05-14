@@ -2,6 +2,7 @@ package vista.Administrador;
 import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import modelo.Empleado;
 
 
 public class CrearCliente extends javax.swing.JFrame {
@@ -10,16 +11,16 @@ public class CrearCliente extends javax.swing.JFrame {
         initComponents();
         
     }
-    public String username = "";
+    public Empleado empleado;
     
-    public CrearCliente(String usuario) {
+    public CrearCliente(Empleado emp) {
         initComponents();
-        username = usuario;
+        empleado = emp;
         //Caracteristicas de la ventana
-        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
+        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setResizable(false);
-        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú Administrador");
+        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú Administrador | Administrar Cliente | Crear cliente");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
         
         //Asignar colores a los botones
@@ -44,12 +45,12 @@ public class CrearCliente extends javax.swing.JFrame {
         btn_ordenPedido = new javax.swing.JButton();
         btn_admBoleta = new javax.swing.JButton();
         btn_admEmpleado = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_informes = new javax.swing.JButton();
         btn_admEmpresa = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btn_crearClient = new javax.swing.JButton();
-        btn_limpiarProv = new javax.swing.JButton();
-        btn_cancelProv = new javax.swing.JButton();
+        btn_limpiar = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         cb_rangoIngreso = new javax.swing.JComboBox<>();
@@ -135,6 +136,11 @@ public class CrearCliente extends javax.swing.JFrame {
         btn_ordenPedido.setText("Adm. Orden de pedido");
         btn_ordenPedido.setBorderPainted(false);
         btn_ordenPedido.setFocusPainted(false);
+        btn_ordenPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordenPedidoActionPerformed(evt);
+            }
+        });
 
         btn_admBoleta.setBackground(new java.awt.Color(12, 140, 153));
         btn_admBoleta.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -155,12 +161,17 @@ public class CrearCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(12, 140, 153));
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Informes");
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
+        btn_informes.setBackground(new java.awt.Color(12, 140, 153));
+        btn_informes.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_informes.setForeground(new java.awt.Color(255, 255, 255));
+        btn_informes.setText("Informes");
+        btn_informes.setBorderPainted(false);
+        btn_informes.setFocusPainted(false);
+        btn_informes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_informesActionPerformed(evt);
+            }
+        });
 
         btn_admEmpresa.setBackground(new java.awt.Color(12, 140, 153));
         btn_admEmpresa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -191,14 +202,14 @@ public class CrearCliente extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btn_admEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addComponent(btn_informes, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
         );
         colorBotonTopLayout.setVerticalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_admCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
             .addComponent(btn_admProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_informes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admBoleta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_admEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -212,25 +223,25 @@ public class CrearCliente extends javax.swing.JFrame {
         btn_crearClient.setText("Crear Cliente");
         btn_crearClient.setBorderPainted(false);
 
-        btn_limpiarProv.setBackground(new java.awt.Color(17, 175, 191));
-        btn_limpiarProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_limpiarProv.setForeground(new java.awt.Color(255, 255, 255));
-        btn_limpiarProv.setText("Limpiar campos");
-        btn_limpiarProv.setBorderPainted(false);
-        btn_limpiarProv.addActionListener(new java.awt.event.ActionListener() {
+        btn_limpiar.setBackground(new java.awt.Color(17, 175, 191));
+        btn_limpiar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_limpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_limpiar.setText("Limpiar campos");
+        btn_limpiar.setBorderPainted(false);
+        btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_limpiarProvActionPerformed(evt);
+                btn_limpiarActionPerformed(evt);
             }
         });
 
-        btn_cancelProv.setBackground(new java.awt.Color(17, 175, 191));
-        btn_cancelProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_cancelProv.setForeground(new java.awt.Color(255, 255, 255));
-        btn_cancelProv.setText("Cancelar");
-        btn_cancelProv.setBorderPainted(false);
-        btn_cancelProv.addActionListener(new java.awt.event.ActionListener() {
+        btn_cancelar.setBackground(new java.awt.Color(17, 175, 191));
+        btn_cancelar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cancelar.setText("Cancelar");
+        btn_cancelar.setBorderPainted(false);
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cancelProvActionPerformed(evt);
+                btn_cancelarActionPerformed(evt);
             }
         });
 
@@ -413,9 +424,9 @@ public class CrearCliente extends javax.swing.JFrame {
                         .addGap(393, 393, 393)
                         .addComponent(btn_crearClient, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(84, 84, 84)
-                        .addComponent(btn_limpiarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
-                        .addComponent(btn_cancelProv, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(299, 299, 299)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,8 +448,8 @@ public class CrearCliente extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(btn_limpiarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cancelProv, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_crearClient, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -519,7 +530,7 @@ public class CrearCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_admClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admClienteActionPerformed
-        AdmCliente ventanaCliente = new AdmCliente(username);
+        AdmCliente ventanaCliente = new AdmCliente(empleado);
         ventanaCliente.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_admClienteActionPerformed
@@ -530,7 +541,7 @@ public class CrearCliente extends javax.swing.JFrame {
 
     private void btn_admProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admProveedorActionPerformed
         this.dispose();
-        AdmProveedor ventanaProveedor = new AdmProveedor(username);
+        AdmProveedor ventanaProveedor = new AdmProveedor(empleado);
         ventanaProveedor.setVisible(true);
     }//GEN-LAST:event_btn_admProveedorActionPerformed
 
@@ -541,22 +552,38 @@ public class CrearCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_admEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpleadoActionPerformed
-        // TODO add your handling code here:
+        AdmEmpleados ventanaEmpleado = new AdmEmpleados(empleado);
+        ventanaEmpleado.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admEmpleadoActionPerformed
 
     private void btn_admEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpresaActionPerformed
-        // TODO add your handling code here:
+        AdmEmpresa ventanaEmpresa = new AdmEmpresa(empleado);
+        ventanaEmpresa.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admEmpresaActionPerformed
 
-    private void btn_cancelProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelProvActionPerformed
-        AdmCliente ventanaCliente = new AdmCliente(username);
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        AdmCliente ventanaCliente = new AdmCliente(empleado);
         ventanaCliente.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btn_cancelProvActionPerformed
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
-    private void btn_limpiarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarProvActionPerformed
+    private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_limpiarProvActionPerformed
+    }//GEN-LAST:event_btn_limpiarActionPerformed
+
+    private void btn_informesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informesActionPerformed
+        Informe ventanaInforme = new Informe(empleado);
+        ventanaInforme.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_informesActionPerformed
+
+    private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
+        AdmOrden ventanaOrden = new AdmOrden(empleado);
+        ventanaOrden.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -602,9 +629,10 @@ public class CrearCliente extends javax.swing.JFrame {
     private javax.swing.JButton btn_admEmpleado;
     private javax.swing.JButton btn_admEmpresa;
     private javax.swing.JButton btn_admProveedor;
-    private javax.swing.JButton btn_cancelProv;
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_crearClient;
-    private javax.swing.JButton btn_limpiarProv;
+    private javax.swing.JButton btn_informes;
+    private javax.swing.JButton btn_limpiar;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente1;
@@ -612,7 +640,6 @@ public class CrearCliente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_rangoIngreso;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

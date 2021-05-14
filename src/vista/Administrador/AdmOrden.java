@@ -2,6 +2,7 @@ package vista.Administrador;
 import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import modelo.Empleado;
 
 
 public class AdmOrden extends javax.swing.JFrame {
@@ -10,16 +11,16 @@ public class AdmOrden extends javax.swing.JFrame {
         initComponents();
         
     }
-    public String username = "";
+    public Empleado empleado;
     
-    public AdmOrden(String usuario) {
+    public AdmOrden(Empleado emp) {
         initComponents();
-        username = usuario;
+        empleado = emp;
         //Caracteristicas de la ventana
-        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
+        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setResizable(false);
-        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú Administrador");
+        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú Administrador | Administrar Orden de pedido");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
         
         //Asignar colores a los botones
@@ -111,7 +112,7 @@ public class AdmOrden extends javax.swing.JFrame {
         btn_ordenPedido.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_ordenPedido.setForeground(new java.awt.Color(255, 255, 255));
         btn_ordenPedido.setText("Adm. Orden de pedido");
-        btn_ordenPedido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0), 3));
+        btn_ordenPedido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 0), 3));
         btn_ordenPedido.setFocusPainted(false);
         btn_ordenPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -319,7 +320,7 @@ public class AdmOrden extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_admClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admClienteActionPerformed
-        AdmCliente ventanaCliente = new AdmCliente(username);
+        AdmCliente ventanaCliente = new AdmCliente(empleado);
         ventanaCliente.setVisible(true);
         this.dispose();  
     }//GEN-LAST:event_btn_admClienteActionPerformed
@@ -330,7 +331,7 @@ public class AdmOrden extends javax.swing.JFrame {
 
     private void btn_admProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admProveedorActionPerformed
         this.dispose();
-        AdmProveedor ventanaProveedor = new AdmProveedor(username);
+        AdmProveedor ventanaProveedor = new AdmProveedor(empleado);
         ventanaProveedor.setVisible(true);
     }//GEN-LAST:event_btn_admProveedorActionPerformed
 
@@ -341,35 +342,39 @@ public class AdmOrden extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_admEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpleadoActionPerformed
-        // TODO add your handling code here:
+        AdmEmpleados ventanaEmpleado = new AdmEmpleados(empleado);
+        ventanaEmpleado.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admEmpleadoActionPerformed
 
     private void btn_admEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admEmpresaActionPerformed
-        // TODO add your handling code here:
+        AdmEmpresa ventanaEmpresa = new AdmEmpresa(empleado);
+        ventanaEmpresa.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_admEmpresaActionPerformed
         // Botón Aprobar y/o Rechazar
     private void btn_admOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admOrdenActionPerformed
         this.dispose();
-        AprobOrden ventana = new AprobOrden(username);
+        AprobOrden ventana = new AprobOrden(empleado);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_admOrdenActionPerformed
 
     private void btn_crearOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearOrdenActionPerformed
         this.dispose();
-        CrearOrden ventana = new CrearOrden(username);
+        CrearOrden ventana = new CrearOrden(empleado);
         ventana.setVisible(true);
         
     }//GEN-LAST:event_btn_crearOrdenActionPerformed
     //Botón del menu principal
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
         this.dispose();
-        AdmOrden ventana = new AdmOrden(username);
+        AdmOrden ventana = new AdmOrden(empleado);
         ventana.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     private void btn_admBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_admBoletaActionPerformed
         this.dispose();
-        AdmBoleta ventanaBoleta = new AdmBoleta(username);
+        AdmBoleta ventanaBoleta = new AdmBoleta(empleado);
         ventanaBoleta.setVisible(true);
     }//GEN-LAST:event_btn_admBoletaActionPerformed
 

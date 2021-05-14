@@ -1,8 +1,15 @@
 package vista;
+import com.sun.xml.internal.ws.commons.xmlutil.Converter;
+import controlador.ConEmpleado;
 import java.awt.Toolkit;
 import javafx.scene.paint.Color;
 import vista.MainEmpleado;
 import vista.MainAdministrador;
+import modelo.Empleado;
+import database.Conexion;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
@@ -66,6 +73,11 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("Contraseña");
 
         txt_password.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyPressed(evt);
+            }
+        });
 
         btn_login.setBackground(new java.awt.Color(0, 204, 204));
         btn_login.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -156,16 +168,44 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void login(){
+       String usuario = txt_username.getText().toLowerCase();
+        String contrasena = txt_password.getText();
+        
+        if(usuario.equals("") || contrasena.equals("")){
+            JOptionPane.showMessageDialog(this,"Debe llenar los campos");
+        }
+        else{
+            ConEmpleado conEmpleado = new ConEmpleado();
+            Empleado empleado = conEmpleado.obtenerEmpleado(usuario, contrasena);
+            if(empleado.getId_emp() == 0){
+                JOptionPane.showMessageDialog(this,"Usuario o contraseña incorrecto");
+            }
+            else{
+                if(empleado.getCargo().getId_cargo() == 1){
+                    MainAdministrador ventana = new MainAdministrador(empleado);
+                    ventana.setVisible(true);
+                    this.dispose();
+                }
+                else{
+                    MainEmpleado ventana = new MainEmpleado(empleado);
+                    ventana.setVisible(true);
+                    this.dispose();
+                }
+            }
+        } 
+    }
+    
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-
-            this.dispose();
-           // MainAdministrador ventanaAdmin = new MainAdministrador("caro");
-           // ventanaAdmin.setVisible(true);
-            MainEmpleado ventanaEmpleado = new MainEmpleado("Usuario");
-            ventanaEmpleado.setVisible(true);
-            
+        login();            
         
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            login();
+        }
+    }//GEN-LAST:event_txt_passwordKeyPressed
 
     /**
      * @param args the command line arguments

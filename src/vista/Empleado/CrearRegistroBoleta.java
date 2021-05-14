@@ -629,8 +629,8 @@ public class CrearRegistroBoleta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_cancelBolRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelBolRegActionPerformed
-        MainEmpleado ventanaMain = new MainEmpleado(username);
-        ventanaMain.setVisible(true);
+        //MainEmpleado ventanaMain = new MainEmpleado();
+        //ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cancelBolRegActionPerformed
 

@@ -165,9 +165,9 @@
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="btn_admEmpleados" min="-2" pref="184" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="btn_admEmpresa" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="btn_admEmpresa" min="-2" pref="166" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="btn_informes" max="32767" attributes="0"/>
+                      <Component id="btn_informes" pref="108" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -318,7 +318,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder thickness="3">
-                      <Color PropertyName="color" blue="0" green="ff" red="ff" type="rgb"/>
+                      <Color PropertyName="color" blue="0" green="cc" red="cc" type="rgb"/>
                     </LineBorder>
                   </Border>
                 </Property>

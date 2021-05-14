@@ -167,7 +167,7 @@
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="btn_admEmpresa" min="-2" pref="184" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="jButton1" max="32767" attributes="0"/>
+                      <Component id="btn_Informe" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -176,7 +176,7 @@
                   <Component id="btn_admCliente" pref="52" max="32767" attributes="0"/>
                   <Component id="btn_admProveedor" alignment="0" max="32767" attributes="0"/>
                   <Component id="btn_ordenPedido" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btn_Informe" alignment="0" max="32767" attributes="0"/>
                   <Component id="btn_admBoleta" alignment="0" max="32767" attributes="0"/>
                   <Component id="btn_admEmpleado" alignment="0" max="32767" attributes="0"/>
                   <Component id="btn_admEmpresa" alignment="0" max="32767" attributes="0"/>
@@ -285,7 +285,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_admEmpleadoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btn_Informe">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="8c" red="c" type="rgb"/>
@@ -300,6 +300,9 @@
                 <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_InformeActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_admEmpresa">
               <Properties>

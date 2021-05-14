@@ -1,6 +1,7 @@
 package vista;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import modelo.Empleado;
 import vista.Empleado.RegistrarBoleta;
 import vista.Empleado.RegistrarCliente;
 import vista.Empleado.RegistrarInforme;
@@ -15,11 +16,11 @@ public class MainEmpleado extends javax.swing.JFrame {
     public MainEmpleado() {
         initComponents();
     }
-   public String username;
+   public Empleado empleado;
    
-   public MainEmpleado(String usuario) {
+   public MainEmpleado(Empleado emp) {
         initComponents();
-        username=usuario;
+        String usuario=emp.getUsuario();
         //Caracteristicas de la ventana
         lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -279,7 +280,7 @@ public class MainEmpleado extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(username);
+        RegistrarCliente ventanaRegistro = new RegistrarCliente("");
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
@@ -288,7 +289,7 @@ public class MainEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_regCliente1ActionPerformed
 
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
-       ReservaHora ventanaReserva = new ReservaHora(username);
+       ReservaHora ventanaReserva = new ReservaHora("");
        ventanaReserva.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_resHoraActionPerformed
@@ -301,25 +302,25 @@ public class MainEmpleado extends javax.swing.JFrame {
 
     private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
         this.dispose();
-        RegistrarInforme ventanaRegInfo = new RegistrarInforme(username);
+        RegistrarInforme ventanaRegInfo = new RegistrarInforme("");
         ventanaRegInfo.setVisible(true);
     }//GEN-LAST:event_btn_informeActionPerformed
 
     private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
         this.dispose();
-        RegistroProv ventanaRegprov = new RegistroProv(username);
+        RegistroProv ventanaRegprov = new RegistroProv("");
         ventanaRegprov.setVisible(true);
     }//GEN-LAST:event_btn_regProveedorActionPerformed
 
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
         this.dispose();
-        RegistrarOrden ventanaOrdenped = new RegistrarOrden(username);
+        RegistrarOrden ventanaOrdenped = new RegistrarOrden("");
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
         this.dispose();
-        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(username);
+        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta("");
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
 

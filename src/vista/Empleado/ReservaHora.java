@@ -711,8 +711,8 @@ public class ReservaHora extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limpiarCamposActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        MainEmpleado ventanaMain = new MainEmpleado(username);
-        ventanaMain.setVisible(true);
+        //MainEmpleado ventanaMain = new MainEmpleado(username);
+        //ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 

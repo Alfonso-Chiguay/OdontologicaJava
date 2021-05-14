@@ -199,7 +199,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder thickness="3">
-                      <Color PropertyName="color" blue="0" green="ff" red="ff" type="rgb"/>
+                      <Color PropertyName="color" blue="0" green="cc" red="cc" type="rgb"/>
                     </LineBorder>
                   </Border>
                 </Property>
@@ -335,7 +335,7 @@
                       <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                       <Component id="btn_elimCliente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                      <Component id="btn_cancelCliente" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_cancelar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -348,7 +348,7 @@
                                   <Component id="btn_buscarCliente" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_buscarPorRut" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
@@ -362,7 +362,7 @@
                       <Component id="jLabel2" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton2" pref="0" max="32767" attributes="0"/>
+                          <Component id="btn_buscarPorRut" pref="0" max="32767" attributes="0"/>
                           <Component id="btn_buscarCliente" pref="29" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -371,7 +371,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_editarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_elimCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_cancelCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="222" max="32767" attributes="0"/>
                   </Group>
@@ -443,7 +443,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_elimClienteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_cancelCliente">
+            <Component class="javax.swing.JButton" name="btn_cancelar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="bf" green="af" red="11" type="rgb"/>
@@ -458,7 +458,7 @@
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cancelClienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cancelarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="btn_buscarCliente">
@@ -477,14 +477,14 @@
                 <Property name="text" type="java.lang.String" value="Buscar cliente por rut"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="btn_buscarPorRut">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/searchicon.png"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_buscarPorRutActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

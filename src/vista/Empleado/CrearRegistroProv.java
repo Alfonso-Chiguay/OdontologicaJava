@@ -516,8 +516,8 @@ public class CrearRegistroProv extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btn_crearProv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearProv2ActionPerformed
-        MainEmpleado ventanaMain = new MainEmpleado(username);
-        ventanaMain.setVisible(true);
+        //MainEmpleado ventanaMain = new MainEmpleado(username);
+        //ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_crearProv2ActionPerformed
 

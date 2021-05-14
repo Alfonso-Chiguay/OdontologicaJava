@@ -1,10 +1,14 @@
 package vista.Empleado;
+import controlador.ConSitEconomica;
 import java.awt.Color;
 import vista.*;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.HashSet;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import modelo.SitEconomica;
 
 public class RegistrarCliente extends javax.swing.JFrame {
     public String username;
@@ -32,6 +36,20 @@ public class RegistrarCliente extends javax.swing.JFrame {
         btn_crear.setBackground(colorBotonTop.getBackground());
         btn_cancelar.setBackground(colorBotonTop.getBackground());
         btn_limpiarCampos.setBackground(colorBotonTop.getBackground());
+        
+        //LLenar combobox
+        ConSitEconomica conSitE = new ConSitEconomica();
+        ArrayList<SitEconomica> listaSitE = conSitE.listarSituaciones();
+        cb_rangoIngreso.addItem("Seleccione rango de ingresos");
+        for(SitEconomica se:listaSitE){
+            int ingMin=se.getIngreso_min();
+            int ingMax=se.getIngreso_max();
+            cb_rangoIngreso.addItem(String.format("%,d",ingMin).replace(",",".")+" - "+String.format("%,d",ingMax).replace(",","."));
+            
+        }
+        
+        ((JLabel)cb_rangoIngreso.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        
     }
 
     /**
@@ -360,18 +378,20 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Seleccione rango de ingresos mensuales");
 
-        cb_rangoIngreso.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        cb_rangoIngreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione un rango-", "Rango 1", "Rango 2", "Rango 3", "Rango 4", "Rango 5" }));
+        cb_rangoIngreso.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cb_rangoIngreso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(cb_rangoIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -560,8 +580,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_limpiarCamposActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        MainEmpleado ventanaMain = new MainEmpleado(username);
-        ventanaMain.setVisible(true);
+        //MainEmpleado ventanaMain = new MainEmpleado(username);
+       // ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
