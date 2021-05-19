@@ -11,7 +11,7 @@ public class Conexion {
     public Connection getConnection(){
                  
         try{          
-            Connection conn = DriverManager.getConnection(SERVER,USER,PASS);                    
+            Connection conn = DriverManager.getConnection(SERVER,USER,PASS);  
             return conn;        
         }
         catch(Exception err){

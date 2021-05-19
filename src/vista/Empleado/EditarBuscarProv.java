@@ -2,6 +2,7 @@ package vista.Empleado;
 import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import modelo.Empleado;
 
 
 public class EditarBuscarProv extends javax.swing.JFrame {
@@ -10,16 +11,16 @@ public class EditarBuscarProv extends javax.swing.JFrame {
     public EditarBuscarProv() {
         initComponents();
     }
-   public String username;
+   public Empleado empleado;
    
-   public EditarBuscarProv(String usuario) {
+   public EditarBuscarProv(Empleado emp) {
         initComponents();
-        username=usuario;
+        empleado=emp;
         //Caracteristicas de la ventana
-        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
+        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setResizable(false);
-        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado");
+        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado | Proveedor | Gestionar proveedor");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
         
         //Asignar colores a los botones
@@ -38,8 +39,6 @@ public class EditarBuscarProv extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_regCliente1 = new javax.swing.JButton();
-        btn_resHora1 = new javax.swing.JButton();
         colorTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         colorBotonTop = new javax.swing.JPanel();
@@ -52,33 +51,14 @@ public class EditarBuscarProv extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_Prov = new javax.swing.JTable();
-        btn_editarProv3 = new javax.swing.JButton();
-        btn_cancelProv3 = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btn_buscarPorRut = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
-
-        btn_regCliente1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_regCliente1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_regCliente1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_regCliente1.setText("Registrar cliente");
-        btn_regCliente1.setBorderPainted(false);
-        btn_regCliente1.setFocusPainted(false);
-        btn_regCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regCliente1ActionPerformed(evt);
-            }
-        });
-
-        btn_resHora1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_resHora1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_resHora1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_resHora1.setText("Reserva de hora");
-        btn_resHora1.setBorderPainted(false);
-        btn_resHora1.setFocusPainted(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1270, 720));
@@ -133,6 +113,11 @@ public class EditarBuscarProv extends javax.swing.JFrame {
         btn_ordenPedido.setText("Orden de pedido");
         btn_ordenPedido.setBorderPainted(false);
         btn_ordenPedido.setFocusPainted(false);
+        btn_ordenPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ordenPedidoActionPerformed(evt);
+            }
+        });
 
         btn_genBolServicio.setBackground(new java.awt.Color(12, 140, 153));
         btn_genBolServicio.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -140,6 +125,11 @@ public class EditarBuscarProv extends javax.swing.JFrame {
         btn_genBolServicio.setText("Generar boleta de servicio");
         btn_genBolServicio.setBorderPainted(false);
         btn_genBolServicio.setFocusPainted(false);
+        btn_genBolServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_genBolServicioActionPerformed(evt);
+            }
+        });
 
         btn_informe.setBackground(new java.awt.Color(12, 140, 153));
         btn_informe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -165,12 +155,12 @@ public class EditarBuscarProv extends javax.swing.JFrame {
                 .addComponent(btn_ordenPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_genBolServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 311, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btn_informe, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         colorBotonTopLayout.setVerticalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_regCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+            .addComponent(btn_regCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
             .addComponent(btn_resHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_regProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_genBolServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -202,27 +192,27 @@ public class EditarBuscarProv extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbl_Prov);
 
-        btn_editarProv3.setBackground(new java.awt.Color(17, 175, 191));
-        btn_editarProv3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_editarProv3.setForeground(new java.awt.Color(255, 255, 255));
-        btn_editarProv3.setText("Editar");
-        btn_editarProv3.setBorderPainted(false);
+        btn_editar.setBackground(new java.awt.Color(17, 175, 191));
+        btn_editar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_editar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_editar.setText("Editar");
+        btn_editar.setBorderPainted(false);
 
-        btn_cancelProv3.setBackground(new java.awt.Color(17, 175, 191));
-        btn_cancelProv3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_cancelProv3.setForeground(new java.awt.Color(255, 255, 255));
-        btn_cancelProv3.setText("Cancelar");
-        btn_cancelProv3.setBorderPainted(false);
-        btn_cancelProv3.addActionListener(new java.awt.event.ActionListener() {
+        btn_cancelar.setBackground(new java.awt.Color(17, 175, 191));
+        btn_cancelar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cancelar.setText("Cancelar");
+        btn_cancelar.setBorderPainted(false);
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cancelProv3ActionPerformed(evt);
+                btn_cancelarActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchicon.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_buscarPorRut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchicon.png"))); // NOI18N
+        btn_buscarPorRut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_buscarPorRutActionPerformed(evt);
             }
         });
 
@@ -241,13 +231,13 @@ public class EditarBuscarProv extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(367, 367, 367)
-                        .addComponent(btn_editarProv3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addComponent(btn_cancelProv3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_buscarPorRut))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -258,14 +248,14 @@ public class EditarBuscarProv extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_buscarPorRut, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_editarProv3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cancelProv3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(204, Short.MAX_VALUE))
+                    .addComponent(btn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -345,16 +335,12 @@ public class EditarBuscarProv extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(username);
+        RegistrarCliente ventanaRegistro = new RegistrarCliente(empleado);
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
-    private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regCliente1ActionPerformed
-
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
-       ReservaHora ventanaReserva = new ReservaHora(username);
+       ReservaHora ventanaReserva = new ReservaHora(empleado);
        ventanaReserva.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_resHoraActionPerformed
@@ -366,24 +352,38 @@ public class EditarBuscarProv extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
-
+        RegistrarInforme ventanaInforme = new RegistrarInforme(empleado);
+        ventanaInforme.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_informeActionPerformed
 
     private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
         this.dispose();
-        RegistroProv ventanaRegprov = new RegistroProv(username);
+        RegistroProv ventanaRegprov = new RegistroProv(empleado);
         ventanaRegprov.setVisible(true);
     }//GEN-LAST:event_btn_regProveedorActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_buscarPorRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarPorRutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_buscarPorRutActionPerformed
 
-    private void btn_cancelProv3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelProv3ActionPerformed
-        //MainEmpleado ventanaMain = new MainEmpleado(username);
-        //ventanaMain.setVisible(true);
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        MainEmpleado ventanaMain = new MainEmpleado(empleado);
+        ventanaMain.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btn_cancelProv3ActionPerformed
+    }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
+        RegistrarOrden ventanaOrden = new RegistrarOrden(empleado);
+        ventanaOrden.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_ordenPedidoActionPerformed
+
+    private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
+        RegistrarBoleta ventanaBoleta = new RegistrarBoleta(empleado);
+        ventanaBoleta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,20 +422,18 @@ public class EditarBuscarProv extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_cancelProv3;
-    private javax.swing.JButton btn_editarProv3;
+    private javax.swing.JButton btn_buscarPorRut;
+    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_genBolServicio;
     private javax.swing.JButton btn_informe;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente;
-    private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_regProveedor;
     private javax.swing.JButton btn_resHora;
-    private javax.swing.JButton btn_resHora1;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -5,6 +5,7 @@ import vista.*;
 import java.awt.Toolkit;
 import java.util.Calendar;
 import javax.swing.SwingConstants;
+import modelo.Empleado;
 
 
 public class ReservaHora extends javax.swing.JFrame {
@@ -13,16 +14,16 @@ public class ReservaHora extends javax.swing.JFrame {
     public ReservaHora() {
         initComponents();
     }
-   public String username;
+   public Empleado empleado;
    
-   public ReservaHora(String usuario) {
+   public ReservaHora(Empleado emp) {
         initComponents();
-        username=usuario;
+        empleado=emp;
         //Caracteristicas de la ventana
-        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
+        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setResizable(false);
-        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado");
+        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado | Reserva de hora");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
         
         //Asignar colores a los botones
@@ -51,10 +52,6 @@ public class ReservaHora extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_regCliente1 = new javax.swing.JButton();
-        btn_resHora1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         colorTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         colorBotonTop = new javax.swing.JPanel();
@@ -94,38 +91,6 @@ public class ReservaHora extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
-
-        btn_regCliente1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_regCliente1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_regCliente1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_regCliente1.setText("Registrar cliente");
-        btn_regCliente1.setBorderPainted(false);
-        btn_regCliente1.setFocusPainted(false);
-        btn_regCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regCliente1ActionPerformed(evt);
-            }
-        });
-
-        btn_resHora1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_resHora1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_resHora1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_resHora1.setText("Reserva de hora");
-        btn_resHora1.setBorderPainted(false);
-        btn_resHora1.setFocusPainted(false);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1270, 720));
@@ -667,17 +632,13 @@ public class ReservaHora extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(username);
+        RegistrarCliente ventanaRegistro = new RegistrarCliente(empleado);
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
-    private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regCliente1ActionPerformed
-
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
         this.dispose();
-        ReservaHora ventanaReshora = new ReservaHora(username);
+        ReservaHora ventanaReshora = new ReservaHora(empleado);
         ventanaReshora.setVisible(true); 
     }//GEN-LAST:event_btn_resHoraActionPerformed
 
@@ -704,38 +665,37 @@ public class ReservaHora extends javax.swing.JFrame {
         txt_email.setText("");
         cb_especialidad.setSelectedIndex(0);        
         Calendar calendar = Calendar.getInstance();
-        date_picker.setSelectedDate(calendar);
-        
-
-        
+        date_picker.setSelectedDate(calendar);        
     }//GEN-LAST:event_btn_limpiarCamposActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        //MainEmpleado ventanaMain = new MainEmpleado(username);
-        //ventanaMain.setVisible(true);
+        MainEmpleado ventanaMain = new MainEmpleado(empleado);
+        ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
         this.dispose();
-        RegistroProv ventanaRegprov = new RegistroProv(username);
+        RegistroProv ventanaRegprov = new RegistroProv(empleado);
         ventanaRegprov.setVisible(true);
     }//GEN-LAST:event_btn_regProveedorActionPerformed
 
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
         this.dispose();
-        RegistrarOrden ventanaOrdenped = new RegistrarOrden(username);
+        RegistrarOrden ventanaOrdenped = new RegistrarOrden(empleado);
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
         this.dispose();
-        RegistrarInforme ventanaRegInfo = new RegistrarInforme(username);
+        RegistrarInforme ventanaRegInfo = new RegistrarInforme(empleado);
         ventanaRegInfo.setVisible(true);
     }//GEN-LAST:event_btn_informeActionPerformed
 
     private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
-        // TODO add your handling code here:
+        RegistrarBoleta ventanaBoleta = new RegistrarBoleta(empleado);
+        ventanaBoleta.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
     /**
@@ -785,10 +745,8 @@ public class ReservaHora extends javax.swing.JFrame {
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente;
-    private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_regProveedor;
     private javax.swing.JButton btn_resHora;
-    private javax.swing.JButton btn_resHora1;
     private javax.swing.JButton btn_reservar;
     private javax.swing.JComboBox<String> cb_especialidad;
     private javax.swing.JPanel colorBody;
@@ -807,9 +765,7 @@ public class ReservaHora extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_usuario;
     private javax.swing.JTable tbl_horasDispo;
     private javax.swing.JTextField txt_apellidos;

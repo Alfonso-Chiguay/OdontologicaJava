@@ -2,6 +2,7 @@ package vista.Empleado;
 import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import modelo.Empleado;
 
 
 
@@ -12,16 +13,16 @@ public class CrearRegistroBoleta extends javax.swing.JFrame {
     public CrearRegistroBoleta() {
         initComponents();
     }
-   public String username;
+   public Empleado empleado;
    
-   public CrearRegistroBoleta(String usuario) {
+   public CrearRegistroBoleta(Empleado emp) {
         initComponents();
-        username=usuario;
+        empleado=emp;
         //Caracteristicas de la ventana
-        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
+        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setResizable(false);
-        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado");
+        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado | Boleta de servicio | Crear nueva boleta");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
         
         //Asignar colores a los botones
@@ -40,8 +41,6 @@ public class CrearRegistroBoleta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_regCliente1 = new javax.swing.JButton();
-        btn_resHora1 = new javax.swing.JButton();
         colorTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         colorBotonTop = new javax.swing.JPanel();
@@ -85,25 +84,6 @@ public class CrearRegistroBoleta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
-
-        btn_regCliente1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_regCliente1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_regCliente1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_regCliente1.setText("Registrar cliente");
-        btn_regCliente1.setBorderPainted(false);
-        btn_regCliente1.setFocusPainted(false);
-        btn_regCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regCliente1ActionPerformed(evt);
-            }
-        });
-
-        btn_resHora1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_resHora1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_resHora1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_resHora1.setText("Reserva de hora");
-        btn_resHora1.setBorderPainted(false);
-        btn_resHora1.setFocusPainted(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1270, 720));
@@ -574,16 +554,12 @@ public class CrearRegistroBoleta extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(username);
+        RegistrarCliente ventanaRegistro = new RegistrarCliente(empleado);
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
-    private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regCliente1ActionPerformed
-
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
-       ReservaHora ventanaReserva = new ReservaHora(username);
+       ReservaHora ventanaReserva = new ReservaHora(empleado);
        ventanaReserva.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_resHoraActionPerformed
@@ -596,19 +572,19 @@ public class CrearRegistroBoleta extends javax.swing.JFrame {
 
     private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
         this.dispose();
-        RegistrarInforme ventanaRegInfo = new RegistrarInforme(username);
+        RegistrarInforme ventanaRegInfo = new RegistrarInforme(empleado);
         ventanaRegInfo.setVisible(true);
     }//GEN-LAST:event_btn_informeActionPerformed
 
     private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
         this.dispose();
-        RegistroProv ventanaRegprov = new RegistroProv(username);
+        RegistroProv ventanaRegprov = new RegistroProv(empleado);
         ventanaRegprov.setVisible(true);
     }//GEN-LAST:event_btn_regProveedorActionPerformed
 
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
         this.dispose();
-        RegistrarOrden ventanaOrdenped = new RegistrarOrden(username);
+        RegistrarOrden ventanaOrdenped = new RegistrarOrden(empleado);
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
@@ -629,14 +605,14 @@ public class CrearRegistroBoleta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_cancelBolRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelBolRegActionPerformed
-        //MainEmpleado ventanaMain = new MainEmpleado();
-        //ventanaMain.setVisible(true);
+        MainEmpleado ventanaMain = new MainEmpleado(empleado);
+        ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cancelBolRegActionPerformed
 
     private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
         this.dispose();
-        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(username);
+        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(empleado);
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
@@ -683,10 +659,8 @@ public class CrearRegistroBoleta extends javax.swing.JFrame {
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente;
-    private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_regProveedor;
     private javax.swing.JButton btn_resHora;
-    private javax.swing.JButton btn_resHora1;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
     private javax.swing.JButton jButton1;

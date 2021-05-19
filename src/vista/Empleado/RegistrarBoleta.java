@@ -2,6 +2,7 @@ package vista.Empleado;
 import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import modelo.Empleado;
 
 
 
@@ -12,16 +13,16 @@ public class RegistrarBoleta extends javax.swing.JFrame {
     public RegistrarBoleta() {
         initComponents();
     }
-   public String username;
+   public Empleado empleado;
    
-   public RegistrarBoleta(String usuario) {
+   public RegistrarBoleta(Empleado emp) {
         initComponents();
-        username=usuario;
+        empleado=emp;
         //Caracteristicas de la ventana
-        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
+        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setResizable(false);
-        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado");
+        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado | Boleta de servicio");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
         
         //Asignar colores a los botones
@@ -40,14 +41,6 @@ public class RegistrarBoleta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_regCliente1 = new javax.swing.JButton();
-        btn_resHora1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_servicioBol = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         colorTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         colorBotonTop = new javax.swing.JPanel();
@@ -63,79 +56,6 @@ public class RegistrarBoleta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
-
-        btn_regCliente1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_regCliente1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_regCliente1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_regCliente1.setText("Registrar cliente");
-        btn_regCliente1.setBorderPainted(false);
-        btn_regCliente1.setFocusPainted(false);
-        btn_regCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regCliente1ActionPerformed(evt);
-            }
-        });
-
-        btn_resHora1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_resHora1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_resHora1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_resHora1.setText("Reserva de hora");
-        btn_resHora1.setBorderPainted(false);
-        btn_resHora1.setFocusPainted(false);
-
-        jPanel2.setBackground(new java.awt.Color(181, 213, 212));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        tbl_servicioBol.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        tbl_servicioBol.setForeground(new java.awt.Color(240, 240, 240));
-        tbl_servicioBol.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Fecha", "Hora", "Especialista", "Especialidad", "Costo"
-            }
-        ));
-        jScrollPane1.setViewportView(tbl_servicioBol);
-
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(240, 240, 240));
-        jLabel10.setText("Servicio realizado Fecha/Hora");
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 74, Short.MAX_VALUE))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1270, 720));
@@ -373,16 +293,12 @@ public class RegistrarBoleta extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(username);
+        RegistrarCliente ventanaRegistro = new RegistrarCliente(empleado);
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
-    private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regCliente1ActionPerformed
-
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
-       ReservaHora ventanaReserva = new ReservaHora(username);
+       ReservaHora ventanaReserva = new ReservaHora(empleado);
        ventanaReserva.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_resHoraActionPerformed
@@ -395,37 +311,37 @@ public class RegistrarBoleta extends javax.swing.JFrame {
 
     private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
         this.dispose();
-        RegistrarInforme ventanaRegInfo = new RegistrarInforme(username);
+        RegistrarInforme ventanaRegInfo = new RegistrarInforme(empleado);
         ventanaRegInfo.setVisible(true);
     }//GEN-LAST:event_btn_informeActionPerformed
 
     private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
         this.dispose();
-        RegistroProv ventanaRegprov = new RegistroProv(username);
+        RegistroProv ventanaRegprov = new RegistroProv(empleado);
         ventanaRegprov.setVisible(true);
     }//GEN-LAST:event_btn_regProveedorActionPerformed
 
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
         this.dispose();
-        RegistrarOrden ventanaOrdenped = new RegistrarOrden(username);
+        RegistrarOrden ventanaOrdenped = new RegistrarOrden(empleado);
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     private void btn_CrearRegBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CrearRegBoletaActionPerformed
         this.dispose();
-        CrearRegistroBoleta ventanaCrearBol = new CrearRegistroBoleta(username);
+        CrearRegistroBoleta ventanaCrearBol = new CrearRegistroBoleta(empleado);
         ventanaCrearBol.setVisible(true);
     }//GEN-LAST:event_btn_CrearRegBoletaActionPerformed
 
     private void btn_anulaRegBolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_anulaRegBolActionPerformed
         this.dispose();
-        AnularBuscarBol ventanaAnularBol = new  AnularBuscarBol(username);
+        AnularBuscarBol ventanaAnularBol = new  AnularBuscarBol(empleado);
         ventanaAnularBol.setVisible(true);
     }//GEN-LAST:event_btn_anulaRegBolActionPerformed
 
     private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
         this.dispose();
-        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(username);
+        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(empleado);
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
@@ -473,21 +389,13 @@ public class RegistrarBoleta extends javax.swing.JFrame {
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente;
-    private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_regProveedor;
     private javax.swing.JButton btn_resHora;
-    private javax.swing.JButton btn_resHora1;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_usuario;
-    private javax.swing.JTable tbl_servicioBol;
     // End of variables declaration//GEN-END:variables
 }

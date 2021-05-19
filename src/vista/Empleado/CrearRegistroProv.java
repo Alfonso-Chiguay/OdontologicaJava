@@ -2,6 +2,7 @@ package vista.Empleado;
 import vista.*;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import modelo.Empleado;
 
 
 public class CrearRegistroProv extends javax.swing.JFrame {
@@ -10,16 +11,16 @@ public class CrearRegistroProv extends javax.swing.JFrame {
     public CrearRegistroProv() {
         initComponents();
     }
-   public String username;
+   public Empleado empleado;
    
-   public CrearRegistroProv(String usuario) {
+   public CrearRegistroProv(Empleado emp) {
         initComponents();
-        username=usuario;
+        empleado=emp;
         //Caracteristicas de la ventana
-        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
+        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setResizable(false);
-        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado");
+        this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado | Proveedor | Crear nuevo proveedor");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
         
         //Asignar colores a los botones
@@ -38,8 +39,6 @@ public class CrearRegistroProv extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_regCliente1 = new javax.swing.JButton();
-        btn_resHora1 = new javax.swing.JButton();
         colorTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         colorBotonTop = new javax.swing.JPanel();
@@ -63,32 +62,13 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        btn_buscarPorRut = new javax.swing.JButton();
+        btn_limpiar = new javax.swing.JButton();
         btn_crearProv = new javax.swing.JButton();
-        btn_crearProv1 = new javax.swing.JButton();
-        btn_crearProv2 = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
-
-        btn_regCliente1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_regCliente1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_regCliente1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_regCliente1.setText("Registrar cliente");
-        btn_regCliente1.setBorderPainted(false);
-        btn_regCliente1.setFocusPainted(false);
-        btn_regCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regCliente1ActionPerformed(evt);
-            }
-        });
-
-        btn_resHora1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_resHora1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_resHora1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_resHora1.setText("Reserva de hora");
-        btn_resHora1.setBorderPainted(false);
-        btn_resHora1.setFocusPainted(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1270, 720));
@@ -261,10 +241,10 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ortodoncia ", "Laborario", "Implantologia", " " }));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchicon.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_buscarPorRut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchicon.png"))); // NOI18N
+        btn_buscarPorRut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_buscarPorRutActionPerformed(evt);
             }
         });
 
@@ -295,7 +275,7 @@ public class CrearRegistroProv extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(37, 37, 37)
-                                .addComponent(jButton2)))
+                                .addComponent(btn_buscarPorRut)))
                         .addGap(0, 170, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -306,7 +286,7 @@ public class CrearRegistroProv extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_buscarPorRut, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -330,26 +310,26 @@ public class CrearRegistroProv extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        btn_limpiar.setBackground(new java.awt.Color(17, 175, 191));
+        btn_limpiar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_limpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_limpiar.setText("Limpiar campos");
+        btn_limpiar.setBorderPainted(false);
+
         btn_crearProv.setBackground(new java.awt.Color(17, 175, 191));
         btn_crearProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_crearProv.setForeground(new java.awt.Color(255, 255, 255));
-        btn_crearProv.setText("Limpiar campos");
+        btn_crearProv.setText("Crear Proveedor");
         btn_crearProv.setBorderPainted(false);
 
-        btn_crearProv1.setBackground(new java.awt.Color(17, 175, 191));
-        btn_crearProv1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_crearProv1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_crearProv1.setText("Crear Proveedor");
-        btn_crearProv1.setBorderPainted(false);
-
-        btn_crearProv2.setBackground(new java.awt.Color(17, 175, 191));
-        btn_crearProv2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_crearProv2.setForeground(new java.awt.Color(255, 255, 255));
-        btn_crearProv2.setText("Cancelar");
-        btn_crearProv2.setBorderPainted(false);
-        btn_crearProv2.addActionListener(new java.awt.event.ActionListener() {
+        btn_cancelar.setBackground(new java.awt.Color(17, 175, 191));
+        btn_cancelar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_cancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cancelar.setText("Cancelar");
+        btn_cancelar.setBorderPainted(false);
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_crearProv2ActionPerformed(evt);
+                btn_cancelarActionPerformed(evt);
             }
         });
 
@@ -361,11 +341,11 @@ public class CrearRegistroProv extends javax.swing.JFrame {
                 .addGap(375, 375, 375)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btn_crearProv1)
-                        .addGap(27, 27, 27)
                         .addComponent(btn_crearProv)
+                        .addGap(27, 27, 27)
+                        .addComponent(btn_limpiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_crearProv2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -376,9 +356,9 @@ public class CrearRegistroProv extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_crearProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_crearProv2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_crearProv1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_crearProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
 
@@ -459,16 +439,12 @@ public class CrearRegistroProv extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(username);
+        RegistrarCliente ventanaRegistro = new RegistrarCliente(empleado);
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
-    private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_regCliente1ActionPerformed
-
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
-       ReservaHora ventanaReserva = new ReservaHora(username);
+       ReservaHora ventanaReserva = new ReservaHora(empleado);
        ventanaReserva.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_resHoraActionPerformed
@@ -481,13 +457,13 @@ public class CrearRegistroProv extends javax.swing.JFrame {
 
     private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
         this.dispose();
-        RegistrarInforme ventanaRegInfo = new RegistrarInforme(username);
+        RegistrarInforme ventanaRegInfo = new RegistrarInforme(empleado);
         ventanaRegInfo.setVisible(true);
     }//GEN-LAST:event_btn_informeActionPerformed
 
     private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
         this.dispose();
-        RegistroProv ventanaRegprov = new RegistroProv(username);
+        RegistroProv ventanaRegprov = new RegistroProv(empleado);
         ventanaRegprov.setVisible(true);
     }//GEN-LAST:event_btn_regProveedorActionPerformed
 
@@ -511,25 +487,25 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_buscarPorRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarPorRutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_buscarPorRutActionPerformed
 
-    private void btn_crearProv2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearProv2ActionPerformed
-        //MainEmpleado ventanaMain = new MainEmpleado(username);
-        //ventanaMain.setVisible(true);
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        MainEmpleado ventanaMain = new MainEmpleado(empleado);
+        ventanaMain.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btn_crearProv2ActionPerformed
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
         this.dispose();
-        RegistrarOrden ventanaOrdenped = new RegistrarOrden(username);
+        RegistrarOrden ventanaOrdenped = new RegistrarOrden(empleado);
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
         this.dispose();
-        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(username);
+        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(empleado);
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
@@ -570,21 +546,19 @@ public class CrearRegistroProv extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_buscarPorRut;
+    private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_crearProv;
-    private javax.swing.JButton btn_crearProv1;
-    private javax.swing.JButton btn_crearProv2;
     private javax.swing.JButton btn_genBolServicio;
     private javax.swing.JButton btn_informe;
+    private javax.swing.JButton btn_limpiar;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente;
-    private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_regProveedor;
     private javax.swing.JButton btn_resHora;
-    private javax.swing.JButton btn_resHora1;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

@@ -1,4 +1,6 @@
 package vista.Empleado;
+import controlador.ConCliente;
+import controlador.Validaciones;
 import controlador.ConSitEconomica;
 import java.awt.Color;
 import vista.*;
@@ -8,20 +10,22 @@ import java.util.HashSet;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import modelo.Cliente;
+import modelo.Empleado;
 import modelo.SitEconomica;
 
 public class RegistrarCliente extends javax.swing.JFrame {
-    public String username;
+    public Empleado empleado;
 
     public RegistrarCliente() {
         initComponents();
     }
     
-   public RegistrarCliente(String usuario) {
+   public RegistrarCliente(Empleado emp) {
         initComponents();
-        username=usuario;
+        empleado=emp;
         //Caracteristicas de la ventana
-        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", usuario));
+        lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setResizable(false);
         this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado | Registrar cliente");
@@ -61,8 +65,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_regCliente1 = new javax.swing.JButton();
-        btn_resHora1 = new javax.swing.JButton();
         colorTop = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         colorBotonTop = new javax.swing.JPanel();
@@ -81,8 +83,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
         txt_nombres = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txt_apellidos = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txt_telefono = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -100,25 +100,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
-
-        btn_regCliente1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_regCliente1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_regCliente1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_regCliente1.setText("Registrar cliente");
-        btn_regCliente1.setBorderPainted(false);
-        btn_regCliente1.setFocusPainted(false);
-        btn_regCliente1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regCliente1ActionPerformed(evt);
-            }
-        });
-
-        btn_resHora1.setBackground(new java.awt.Color(12, 140, 153));
-        btn_resHora1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_resHora1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_resHora1.setText("Reserva de hora");
-        btn_resHora1.setBorderPainted(false);
-        btn_resHora1.setFocusPainted(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1270, 720));
@@ -238,18 +219,33 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("RUT");
+        jLabel2.setText("RUT (Sin puntos) *Será el usuario");
 
         txt_rut.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_rut.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_rut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_rutKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("-");
 
         txt_dv.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_dv.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_dv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dvKeyTyped(evt);
+            }
+        });
 
         txt_nombres.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_nombres.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_nombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombresKeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -257,13 +253,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
         txt_apellidos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Telefono");
-
-        txt_telefono.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_apellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_apellidosKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -271,6 +265,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
         txt_email.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_emailKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -292,8 +291,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
                         .addComponent(txt_dv, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6)
                     .addComponent(txt_apellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(txt_email)
                     .addComponent(jLabel9)
@@ -303,7 +300,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -318,15 +315,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(181, 213, 212));
@@ -337,12 +330,22 @@ public class RegistrarCliente extends javax.swing.JFrame {
         jLabel5.setText("Nueva contraseña");
 
         txt_passUno.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_passUno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_passUnoKeyTyped(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Repita contraseña");
 
         txt_passDos.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_passDos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_passDosKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -401,7 +404,7 @@ public class RegistrarCliente extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(cb_rangoIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         btn_limpiarCampos.setBackground(new java.awt.Color(17, 175, 191));
@@ -428,6 +431,11 @@ public class RegistrarCliente extends javax.swing.JFrame {
         btn_crear.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_crear.setForeground(new java.awt.Color(255, 255, 255));
         btn_crear.setText("Confirmar y crear");
+        btn_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -458,9 +466,9 @@ public class RegistrarCliente extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(75, 75, 75)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_limpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,17 +553,13 @@ public class RegistrarCliente extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistrar = new RegistrarCliente(username);
+        RegistrarCliente ventanaRegistrar = new RegistrarCliente(empleado);
         ventanaRegistrar.setVisible(true); 
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
-    private void btn_regCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regCliente1ActionPerformed
-
-    }//GEN-LAST:event_btn_regCliente1ActionPerformed
-
     private void btn_resHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resHoraActionPerformed
         this.dispose();
-        ReservaHora ventanaReshora = new ReservaHora(username);
+        ReservaHora ventanaReshora = new ReservaHora(empleado);
         ventanaReshora.setVisible(true);
     }//GEN-LAST:event_btn_resHoraActionPerformed
 
@@ -565,49 +569,142 @@ public class RegistrarCliente extends javax.swing.JFrame {
         ventanaLogin.setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void btn_limpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarCamposActionPerformed
+    private void limpiarCampos(){
         txt_rut.setText("");
         txt_dv.setText("");
         txt_nombres.setText("");
-        txt_apellidos.setText("");
-        txt_telefono.setText("");
+        txt_apellidos.setText("");        
         txt_email.setText("");
         txt_passUno.setText("");
         txt_passDos.setText("");
         cb_rangoIngreso.setSelectedIndex(0);
-       
+        
+    }
+    
+    private void btn_limpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarCamposActionPerformed
+        limpiarCampos();       
         JOptionPane.showMessageDialog(this, "Formulario reestablecido");
     }//GEN-LAST:event_btn_limpiarCamposActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        //MainEmpleado ventanaMain = new MainEmpleado(username);
-       // ventanaMain.setVisible(true);
+        MainEmpleado ventanaMain = new MainEmpleado(empleado);
+        ventanaMain.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_regProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regProveedorActionPerformed
         this.dispose();
-        RegistroProv ventanaRegprov = new RegistroProv(username);
+        RegistroProv ventanaRegprov = new RegistroProv(empleado);
         ventanaRegprov.setVisible(true);
     }//GEN-LAST:event_btn_regProveedorActionPerformed
 
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
         this.dispose();
-        RegistrarOrden ventanaOrdenped = new RegistrarOrden(username);
+        RegistrarOrden ventanaOrdenped = new RegistrarOrden(empleado);
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
     private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
         this.dispose();
-        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(username);
+        RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(empleado);
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
     private void btn_informeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_informeActionPerformed
         this.dispose();
-        RegistrarInforme ventanaRegInfo = new RegistrarInforme(username);
+        RegistrarInforme ventanaRegInfo = new RegistrarInforme(empleado);
         ventanaRegInfo.setVisible(true);
     }//GEN-LAST:event_btn_informeActionPerformed
+
+    private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))) evt.consume();        
+        if(txt_rut.getText().length()==8) evt.consume();        
+    }//GEN-LAST:event_txt_rutKeyTyped
+
+    private void txt_dvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dvKeyTyped
+        char enter = evt.getKeyChar();             
+        if(enter!='k' && enter!='K'){
+            if(!(Character.isDigit(enter))) evt.consume();                        
+        }               
+        if(txt_dv.getText().length() == 1) evt.consume();         
+    }//GEN-LAST:event_txt_dvKeyTyped
+
+    private void txt_nombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombresKeyTyped
+        if(txt_nombres.getText().length() == 100) evt.consume();        
+    }//GEN-LAST:event_txt_nombresKeyTyped
+
+    private void txt_apellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidosKeyTyped
+        if(txt_apellidos.getText().length() == 100) evt.consume();        
+    }//GEN-LAST:event_txt_apellidosKeyTyped
+
+    private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
+        if(txt_email.getText().length() == 50) evt.consume();        
+    }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void txt_passUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passUnoKeyTyped
+        if(txt_passUno.getText().length() == 10) evt.consume();            
+    }//GEN-LAST:event_txt_passUnoKeyTyped
+
+    private void txt_passDosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passDosKeyTyped
+        if(txt_passDos.getText().length() == 10) evt.consume(); 
+    }//GEN-LAST:event_txt_passDosKeyTyped
+
+    private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
+         
+        Validaciones validador = new Validaciones();
+        if(!validador.validaRut(txt_rut.getText()+"-"+txt_dv.getText())){
+           JOptionPane.showMessageDialog(this, "Rut invalido"); 
+           return; 
+        }
+
+        if(txt_nombres.getText().length()<3 || txt_apellidos.getText().length()<3 ){
+           JOptionPane.showMessageDialog(this, "Ingrese nombre y apellido"); 
+           return; 
+        }
+
+        if(!validador.validaEmail(txt_email.getText())){
+           JOptionPane.showMessageDialog(this, "Ingrese un email válido"); 
+           return;
+        }
+        
+        if(!txt_passUno.getText().equals(txt_passDos.getText())){
+           JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden"); 
+           return;
+        }
+        if(txt_passUno.getText().length()<5){
+           JOptionPane.showMessageDialog(this, "Contraseña demasiado corta"); 
+           return; 
+        }
+
+        int id_site = cb_rangoIngreso.getSelectedIndex();
+        if(id_site == 0){
+           JOptionPane.showMessageDialog(this, "Debe seleccionar un rango de ingresos"); 
+           return;
+        }           
+
+        Cliente cliente = new Cliente();        
+        ConSitEconomica conSite = new ConSitEconomica();
+        SitEconomica site = conSite.obtenerPorId(id_site);
+
+        cliente.setRut(Integer.parseInt(txt_rut.getText()));
+        cliente.setDv(txt_dv.getText());
+        cliente.setNombres(txt_nombres.getText());
+        cliente.setApellidos(txt_apellidos.getText());
+        cliente.setUsuario(txt_rut.getText());
+        cliente.setContrasena(txt_passUno.getText());
+        cliente.setEmail(txt_email.getText());
+        cliente.setSit_economica(site);
+
+        ConCliente conCli = new ConCliente();
+        int creacion=conCli.CrearCliente(cliente);
+        if(creacion == 1){
+            JOptionPane.showMessageDialog(this, "Cliente creado exitosamente");
+            limpiarCampos();
+        }
+        else JOptionPane.showMessageDialog(this, "Error creando cliente");
+        
+    }//GEN-LAST:event_btn_crearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -654,10 +751,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente;
-    private javax.swing.JButton btn_regCliente1;
     private javax.swing.JButton btn_regProveedor;
     private javax.swing.JButton btn_resHora;
-    private javax.swing.JButton btn_resHora1;
     private javax.swing.JComboBox<String> cb_rangoIngreso;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
@@ -669,7 +764,6 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -684,6 +778,5 @@ public class RegistrarCliente extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_passDos;
     private javax.swing.JPasswordField txt_passUno;
     private javax.swing.JTextField txt_rut;
-    private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
 }

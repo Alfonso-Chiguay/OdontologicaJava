@@ -33,4 +33,28 @@ public class ConSitEconomica {
         }        
         return lista;
     }
+    
+    public SitEconomica obtenerPorId(int id_site){
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();
+        SitEconomica sitec = new SitEconomica();
+        try{
+            String query = "BEGIN PKG_SIT_ECONOMICA.sp_obtener_sitEconomica(?,?);END;";
+            CallableStatement call = (CallableStatement) con.prepareCall(query);
+            call.setInt(1, id_site);
+            call.registerOutParameter(2, OracleTypes.CURSOR);
+            
+            call.execute();
+            ResultSet rs = (ResultSet)call.getObject(2);
+            while(rs.next()){               
+                sitec.setId_sit_econ(rs.getInt("id_sit_econ"));
+                sitec.setIngreso_min(rs.getInt("ingreso_min"));
+                sitec.setIngreso_max(rs.getInt("ingreso_max"));                
+            }            
+        }
+        catch(Exception e){
+            System.out.println("Error|ConSitEconomica:obtenerPorId: "+e.getMessage());
+        } 
+        return sitec;
+    }
 }
