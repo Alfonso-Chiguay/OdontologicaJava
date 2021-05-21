@@ -140,5 +140,35 @@ public class ConCliente {
         }        
     }
     
+    public boolean existeCliente(String rut, String dv){
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();  
+        String rut_bd="";
+        String rut_jv=rut+"-"+dv;
+        boolean retorno=false;
+        try{
+            String query = "BEGIN PKG_CLIENTE.SP_FILTRAR_CLIENTE(?,?); END;";
+            CallableStatement call = (CallableStatement) con.prepareCall(query);
+            call.setString(1,rut);
+            call.registerOutParameter(2, OracleTypes.CURSOR);
+            
+            call.execute();
+            ResultSet rs = (ResultSet)call.getObject(2);
+                        
+            while(rs.next()){                              
+                rut_bd = String.valueOf(rs.getInt("RUT"))+"-"+rs.getString("DV");
+                if(rut_bd.equals(rut_jv)) {
+                    retorno=true;
+                    break;
+                }                 
+            }
+        }
+        catch(Exception e){
+            System.out.println("Error|ConCliente:existeCliente: "+e.getMessage()); 
+        }
+        
+        return retorno;
+    }
+    
     
 }

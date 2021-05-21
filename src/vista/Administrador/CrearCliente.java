@@ -619,9 +619,15 @@ public class CrearCliente extends javax.swing.JFrame {
     
     private void btn_crearClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearClientActionPerformed
         Validaciones validador = new Validaciones();
+        ConCliente conCli = new ConCliente();
         if(!validador.validaRut(txt_rut.getText()+"-"+txt_dv.getText())){
            JOptionPane.showMessageDialog(this, "Rut invalido"); 
            return; 
+        }
+        
+        if(conCli.existeCliente(txt_rut.getText(), txt_dv.getText())){
+           JOptionPane.showMessageDialog(this, "El Rut ya existe en la base de datos"); 
+           return;             
         }
 
         if(txt_nombres.getText().length()<3 || txt_apellidos.getText().length()<3 ){
@@ -662,7 +668,7 @@ public class CrearCliente extends javax.swing.JFrame {
         cliente.setEmail(txt_email.getText());
         cliente.setSit_economica(site);
 
-        ConCliente conCli = new ConCliente();
+        
         int creacion=conCli.CrearCliente(cliente);
         if(creacion == 1){
             JOptionPane.showMessageDialog(this, "Cliente creado exitosamente");

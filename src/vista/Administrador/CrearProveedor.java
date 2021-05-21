@@ -540,13 +540,19 @@ public class CrearProveedor extends javax.swing.JFrame {
     
     
     private void btn_crearProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearProvActionPerformed
+        ConProveedor conProv = new ConProveedor();
         Validaciones validador = new Validaciones();
-        
-        if(!validador.validaRut(txt_rut.getText()+"-"+txt_dv.getText())){
+        String rut_jv=txt_rut.getText()+"-"+txt_dv.getText();
+        if(!validador.validaRut(rut_jv)){
            JOptionPane.showMessageDialog(this, "Rut invalido"); 
            return; 
         }
 
+        if(conProv.existeProveedor(txt_rut.getText(), txt_dv.getText())){
+            JOptionPane.showMessageDialog(this, "El Rut ya existe en la base de datos"); 
+            return;  
+        }
+        
         if(txt_razonSocial.getText().length()<5){
            JOptionPane.showMessageDialog(this, "Ingrese una razon social"); 
            return; 
@@ -590,7 +596,7 @@ public class CrearProveedor extends javax.swing.JFrame {
         contacto.setTelefono(txt_telefono.getText());
         contacto.setEmail(txt_email.getText());
         
-        ConProveedor conProv = new ConProveedor();
+        
         int crear = conProv.CrearProveedor(proveedor, contacto);
         if(crear == 1){
             JOptionPane.showMessageDialog(this, "Proveedor creado exitosamente");
