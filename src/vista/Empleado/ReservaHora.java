@@ -1,11 +1,24 @@
 package vista.Empleado;
+import controlador.ConCliente;
+import controlador.ConEspHora;
+import controlador.ConEspecialidad;
+import controlador.Validaciones;
 import datechooser.view.WeekDaysStyle;
 import java.awt.Color;
 import vista.*;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import modelo.Cliente;
 import modelo.Empleado;
+import modelo.EspHora;
+import modelo.Especialidad;
 
 
 public class ReservaHora extends javax.swing.JFrame {
@@ -15,6 +28,8 @@ public class ReservaHora extends javax.swing.JFrame {
         initComponents();
     }
    public Empleado empleado;
+   public ArrayList<EspHora> listadoHorario;
+   public Cliente cliente_global;
    
    public ReservaHora(Empleado emp) {
         initComponents();
@@ -33,12 +48,36 @@ public class ReservaHora extends javax.swing.JFrame {
         btn_logout.setBackground(colorTop.getBackground());
         btn_buscarRut.setBackground(colorBody.getBackground());
         btn_editEmail.setBackground(colorBody.getBackground());
-        btn_editTelefono.setBackground(colorBody.getBackground());
         cb_especialidad.setBackground(Color.WHITE);
         tbl_horasDispo.setBackground(Color.WHITE);
         btn_reservar.setBackground(colorBotonTop.getBackground());
         btn_limpiarCampos.setBackground(colorBotonTop.getBackground());
         btn_cancelar.setBackground(colorBotonTop.getBackground());
+        btn_buscarHora.setBackground(colorTop.getBackground());
+        btn_confirmCliente.setBackground(colorTop.getBackground());
+        btn_confirmEsp.setBackground(colorTop.getBackground());
+
+        
+        //Restriccion de calendario
+        Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH)-1;
+        c.set(Calendar.DAY_OF_MONTH, mDay);
+        date_picker.setMinDate(c);
+        //Llenar combobox de especialidad
+        cb_especialidad.addItem("Seleccione una especialidad");
+        ConEspecialidad controlador = new ConEspecialidad();
+        ArrayList<Especialidad> listaEsp = controlador.listarEspecialidad();
+        for(Especialidad e: listaEsp){
+            cb_especialidad.addItem(String.valueOf(e.getId_especialidad())+" - "+e.getNombre());
+        }
+        
+        //Anchos de columnas
+        TableColumnModel columnModel = tbl_horasDispo.getColumnModel();
+        columnModel.getColumn(0).setMaxWidth(40);
+        columnModel.getColumn(1).setMaxWidth(240);
+        columnModel.getColumn(2).setMaxWidth(100);
         
         
     }
@@ -70,18 +109,18 @@ public class ReservaHora extends javax.swing.JFrame {
         txt_nombres = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txt_apellidos = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txt_telefono = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txt_email = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         btn_buscarRut = new javax.swing.JButton();
-        btn_editTelefono = new javax.swing.JButton();
         btn_editEmail = new javax.swing.JButton();
+        btn_confirmCliente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         cb_especialidad = new javax.swing.JComboBox<>();
+        btn_confirmEsp = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        date_picker = new datechooser.beans.DateChooserPanel();
+        date_picker = new datechooser.beans.DateChooserCombo();
+        btn_buscarHora = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_horasDispo = new javax.swing.JTable();
@@ -186,7 +225,7 @@ public class ReservaHora extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(btn_regProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ordenPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_genBolServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -213,11 +252,21 @@ public class ReservaHora extends javax.swing.JFrame {
 
         txt_rut.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_rut.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_rut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_rutKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("-");
 
         txt_dv.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_dv.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_dv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dvKeyTyped(evt);
+            }
+        });
 
         txt_nombres.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_nombres.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -231,14 +280,6 @@ public class ReservaHora extends javax.swing.JFrame {
         txt_apellidos.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_apellidos.setEnabled(false);
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Telefono");
-
-        txt_telefono.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_telefono.setEnabled(false);
-
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Correo electrónico");
@@ -246,6 +287,11 @@ public class ReservaHora extends javax.swing.JFrame {
         txt_email.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_email.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_email.setEnabled(false);
+        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_emailKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -253,20 +299,29 @@ public class ReservaHora extends javax.swing.JFrame {
 
         btn_buscarRut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchicon.png"))); // NOI18N
         btn_buscarRut.setBorderPainted(false);
-
-        btn_editTelefono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editicon.png"))); // NOI18N
-        btn_editTelefono.setBorderPainted(false);
-        btn_editTelefono.addActionListener(new java.awt.event.ActionListener() {
+        btn_buscarRut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editTelefonoActionPerformed(evt);
+                btn_buscarRutActionPerformed(evt);
             }
         });
 
         btn_editEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editicon.png"))); // NOI18N
         btn_editEmail.setBorderPainted(false);
+        btn_editEmail.setEnabled(false);
         btn_editEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_editEmailActionPerformed(evt);
+            }
+        });
+
+        btn_confirmCliente.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        btn_confirmCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btn_confirmCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_confirm.png"))); // NOI18N
+        btn_confirmCliente.setText("Confirmar cliente");
+        btn_confirmCliente.setEnabled(false);
+        btn_confirmCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_confirmClienteActionPerformed(evt);
             }
         });
 
@@ -276,32 +331,30 @@ public class ReservaHora extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_apellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_email)
-                    .addComponent(jLabel9)
-                    .addComponent(txt_nombres)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_confirmCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6)
+                            .addComponent(txt_apellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                            .addComponent(jLabel8)
+                            .addComponent(txt_email)
+                            .addComponent(jLabel9)
+                            .addComponent(txt_nombres)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_dv, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_dv, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btn_buscarRut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_buscarRut, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_editTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_editEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_editEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -326,33 +379,39 @@ public class ReservaHora extends javax.swing.JFrame {
                 .addComponent(txt_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(btn_editTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(16, 16, 16)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_editEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_editEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(btn_confirmCliente)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(181, 213, 212));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "(2)  Especialidad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
 
         cb_especialidad.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        cb_especialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione especialidad-", "Especialidad 1", "Especialidad 2", "Especialidad 3", "Especialidad 4", "Especialidad 5", "Especialidad 6", "Especialidad 7", "Especialidad 8" }));
+        cb_especialidad.setEnabled(false);
+
+        btn_confirmEsp.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        btn_confirmEsp.setForeground(new java.awt.Color(255, 255, 255));
+        btn_confirmEsp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_confirm.png"))); // NOI18N
+        btn_confirmEsp.setText("Confirmar especialidad");
+        btn_confirmEsp.setEnabled(false);
+        btn_confirmEsp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_confirmEspActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -360,7 +419,9 @@ public class ReservaHora extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cb_especialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cb_especialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_confirmEsp, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -368,13 +429,15 @@ public class ReservaHora extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(cb_especialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_confirmEsp)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "(3)  Fecha", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        date_picker.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
+        date_picker.setCurrentView(new datechooser.view.appearance.AppearancesList("Swing",
             new datechooser.view.appearance.ViewAppearance("custom",
                 new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(0, 0, 0),
@@ -415,28 +478,43 @@ public class ReservaHora extends javax.swing.JFrame {
                 (datechooser.view.BackRenderer)null,
                 false,
                 true)));
-    date_picker.setCalendarBackground(new java.awt.Color(0, 153, 153));
-    date_picker.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 1));
+    date_picker.setCalendarBackground(new java.awt.Color(255, 255, 255));
+    date_picker.setFormat(2);
     date_picker.setWeekStyle(datechooser.view.WeekDaysStyle.SHORT);
-    date_picker.setNavigateFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 14));
-    date_picker.setCurrentNavigateIndex(1);
-    date_picker.setBehavior(datechooser.model.multiple.MultyModelBehavior.SELECT_PERIOD);
+    date_picker.setEnabled(false);
+    date_picker.setFieldFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 14));
+    date_picker.setLocale(new java.util.Locale("es", "CL", ""));
+    date_picker.setNavigateFont(new java.awt.Font("Times New Roman", java.awt.Font.PLAIN, 15));
+
+    btn_buscarHora.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+    btn_buscarHora.setForeground(new java.awt.Color(255, 255, 255));
+    btn_buscarHora.setText("Buscar horas ►");
+    btn_buscarHora.setEnabled(false);
+    btn_buscarHora.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btn_buscarHoraActionPerformed(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
     jPanel3.setLayout(jPanel3Layout);
     jPanel3Layout.setHorizontalGroup(
         jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel3Layout.createSequentialGroup()
-            .addGap(18, 18, 18)
-            .addComponent(date_picker, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(20, Short.MAX_VALUE))
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addContainerGap(33, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(btn_buscarHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(date_picker, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+            .addGap(30, 30, 30))
     );
     jPanel3Layout.setVerticalGroup(
         jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel3Layout.createSequentialGroup()
-            .addContainerGap()
-            .addComponent(date_picker, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addContainerGap())
+            .addGap(39, 39, 39)
+            .addComponent(date_picker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addComponent(btn_buscarHora)
+            .addContainerGap(51, Short.MAX_VALUE))
     );
 
     jPanel4.setBackground(new java.awt.Color(181, 213, 212));
@@ -449,14 +527,14 @@ public class ReservaHora extends javax.swing.JFrame {
 
         },
         new String [] {
-            "Doctor", "Hora"
+            "Id", "Doctor", "Hora"
         }
     ) {
         Class[] types = new Class [] {
-            java.lang.String.class, java.lang.String.class
+            java.lang.Object.class, java.lang.String.class, java.lang.String.class
         };
         boolean[] canEdit = new boolean [] {
-            false, false
+            false, false, false
         };
 
         public Class getColumnClass(int columnIndex) {
@@ -467,6 +545,7 @@ public class ReservaHora extends javax.swing.JFrame {
             return canEdit [columnIndex];
         }
     });
+    tbl_horasDispo.setEnabled(false);
     jScrollPane2.setViewportView(tbl_horasDispo);
 
     javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -475,21 +554,26 @@ public class ReservaHora extends javax.swing.JFrame {
         jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel4Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
             .addContainerGap())
     );
     jPanel4Layout.setVerticalGroup(
         jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel4Layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(19, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addContainerGap())
     );
 
     btn_reservar.setBackground(new java.awt.Color(17, 175, 191));
     btn_reservar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
     btn_reservar.setForeground(new java.awt.Color(255, 255, 255));
     btn_reservar.setText("Reservar hora");
+    btn_reservar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btn_reservarActionPerformed(evt);
+        }
+    });
 
     btn_limpiarCampos.setBackground(new java.awt.Color(17, 175, 191));
     btn_limpiarCampos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -516,15 +600,15 @@ public class ReservaHora extends javax.swing.JFrame {
     colorBodyLayout.setHorizontalGroup(
         colorBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(colorBodyLayout.createSequentialGroup()
-            .addGap(131, 131, 131)
+            .addGap(92, 92, 92)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(41, 41, 41)
+            .addGap(18, 18, 18)
             .addGroup(colorBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(43, 43, 43)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(66, 66, 66)
             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(107, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, colorBodyLayout.createSequentialGroup()
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_reservar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -538,14 +622,15 @@ public class ReservaHora extends javax.swing.JFrame {
         colorBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(colorBodyLayout.createSequentialGroup()
             .addGap(46, 46, 46)
-            .addGroup(colorBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, colorBodyLayout.createSequentialGroup()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGap(40, 40, 40)
+            .addGroup(colorBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, colorBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(colorBodyLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
             .addGroup(colorBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btn_limpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -591,8 +676,8 @@ public class ReservaHora extends javax.swing.JFrame {
                     .addComponent(btn_logout)
                     .addContainerGap())))
         .addGroup(colorTopLayout.createSequentialGroup()
-            .addComponent(colorBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(colorBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 0, 0))
     );
     colorTopLayout.setVerticalGroup(
         colorTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -648,10 +733,6 @@ public class ReservaHora extends javax.swing.JFrame {
         ventanaLogin.setVisible(true);
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void btn_editTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editTelefonoActionPerformed
-        txt_telefono.setEnabled(true);
-    }//GEN-LAST:event_btn_editTelefonoActionPerformed
-
     private void btn_editEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editEmailActionPerformed
         txt_email.setEnabled(true);
     }//GEN-LAST:event_btn_editEmailActionPerformed
@@ -661,7 +742,6 @@ public class ReservaHora extends javax.swing.JFrame {
         txt_dv.setText("");
         txt_nombres.setText("");
         txt_apellidos.setText("");
-        txt_telefono.setText("");
         txt_email.setText("");
         cb_especialidad.setSelectedIndex(0);        
         Calendar calendar = Calendar.getInstance();
@@ -697,6 +777,156 @@ public class ReservaHora extends javax.swing.JFrame {
         ventanaBoleta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
+
+    private void btn_buscarRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarRutActionPerformed
+        Validaciones validar = new Validaciones();
+        
+        if(txt_rut.getText().length()<7 || txt_dv.getText().length()<1){
+            JOptionPane.showMessageDialog(this, "Ingrese un rut");
+        }
+        else{
+            
+            if(!validar.validaRut(txt_rut.getText()+"-"+txt_dv.getText())){
+                JOptionPane.showMessageDialog(this, "Ingrese un rut válido");
+                return;
+            }
+            
+            ConCliente controlador = new ConCliente();
+            if(!controlador.existeCliente(txt_rut.getText(), txt_dv.getText())){
+                String mensaje = "No existe cliente asociado al rut: "+txt_rut.getText()+"-"+txt_dv.getText()+
+                    "\n\n¿Desea crearlo?";            
+                //SI=0, NO=1, CANCEL=2
+                int respuesta=JOptionPane.showConfirmDialog(this,mensaje,"No existe cliente",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if(respuesta==0){
+                    RegistrarCliente ventana = new RegistrarCliente(empleado,txt_rut.getText(),txt_dv.getText());
+                    ventana.setVisible(true);
+                    this.dispose();
+                }
+            }
+            else{
+                Cliente cliente = controlador.filtrarCliente(txt_rut.getText()).get(0);
+                cliente_global = cliente;
+                txt_nombres.setText(cliente.getNombres());
+                txt_apellidos.setText(cliente.getApellidos());
+                txt_email.setText(cliente.getEmail());
+                btn_editEmail.setEnabled(true);
+                btn_confirmCliente.setEnabled(true);
+            }
+        }
+        
+    }//GEN-LAST:event_btn_buscarRutActionPerformed
+
+    private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
+        char enter = evt.getKeyChar();
+        
+        if(!(Character.isDigit(enter))) evt.consume();        
+        if(txt_rut.getText().length()==8 && evt.getKeyCode() != KeyEvent.VK_DELETE) evt.consume();            
+    }//GEN-LAST:event_txt_rutKeyTyped
+
+    private void txt_dvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dvKeyTyped
+        char enter = evt.getKeyChar();             
+        if(enter!='k' && enter!='K'){
+            if(!(Character.isDigit(enter))) evt.consume();                        
+        }               
+        if(txt_dv.getText().length() == 1 && evt.getKeyCode() != KeyEvent.VK_DELETE) evt.consume(); 
+    }//GEN-LAST:event_txt_dvKeyTyped
+
+    private void btn_buscarHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarHoraActionPerformed
+        tbl_horasDispo.setEnabled(true);
+        String fecha = date_picker.getText();
+        String especialidad = (String)cb_especialidad.getSelectedItem();
+        int id_especialidad = Integer.parseInt(especialidad.replace(" - ", "ñ").split("ñ")[0]);
+        ConEspHora controlador = new ConEspHora();
+        ArrayList<EspHora> lista = controlador.listarEspHora(id_especialidad, fecha);
+        listadoHorario = lista;
+        DefaultTableModel table = (DefaultTableModel) tbl_horasDispo.getModel();
+        table.setRowCount(0);
+        for(EspHora eh: lista){
+            Object fila[]={
+                eh.getId_esphora(),
+                eh.getEspecialista().getNombres()+" "+eh.getEspecialista().getApellidos(),
+                eh.getHorario().getHora_ini()+" - "+eh.getHorario().getHora_fin()
+            };
+            table.addRow(fila);
+        }
+        
+       
+        
+        
+        
+
+        //if(cb_especialidad.getSelectedIndex()==-1){           
+
+            //JOptionPane.showMessageDialog(this, "Seleccione una especialidad");
+        //}
+    }//GEN-LAST:event_btn_buscarHoraActionPerformed
+
+    private void btn_confirmClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmClienteActionPerformed
+        Validaciones validar = new Validaciones();
+        if(!validar.validaEmail(txt_email.getText())){
+            JOptionPane.showMessageDialog(this, "El nuevo e-mail no tiene un formato correcto");
+            return;
+        }
+        
+        txt_rut.setText(String.valueOf(cliente_global.getRut()));
+        txt_dv.setText(cliente_global.getDv());
+        txt_email.setEnabled(false);
+        btn_editEmail.setEnabled(false);
+        txt_rut.setEnabled(false);
+        txt_dv.setEnabled(false);
+        
+        cb_especialidad.setEnabled(true);
+        btn_confirmEsp.setEnabled(true);
+        btn_confirmCliente.setEnabled(false);
+        btn_buscarRut.setEnabled(false);
+        btn_buscarRut.setVisible(false);
+        
+    }//GEN-LAST:event_btn_confirmClienteActionPerformed
+
+    private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
+        if(txt_email.getText().length() == 50) evt.consume();
+    }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void btn_confirmEspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmEspActionPerformed
+        if(cb_especialidad.getSelectedIndex()>0){
+            cb_especialidad.setEnabled(false);
+            btn_confirmEsp.setEnabled(false);
+            date_picker.setEnabled(true);
+            btn_buscarHora.setEnabled(true);
+
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una especialidad");
+        }
+    }//GEN-LAST:event_btn_confirmEspActionPerformed
+
+    private void btn_reservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reservarActionPerformed
+        if(tbl_horasDispo.getSelectedRow()>=0){
+            String especialidad = (String)cb_especialidad.getSelectedItem();
+            String mensaje = "[RESUMEN DE AGENDAMIENTO]"+
+                    "\nFecha..................."+date_picker.getText()+
+                    "\nDoctor.................."+(String)tbl_horasDispo.getValueAt(tbl_horasDispo.getSelectedRow(), 1)+
+                    "\nEspecialidad......"+especialidad.replace(" - ", "ñ").split("ñ")[1]+
+                    "\nHora....................."+(String)tbl_horasDispo.getValueAt(tbl_horasDispo.getSelectedRow(), 2)+
+                    "\nRut cliente.........."+txt_rut.getText()+"-"+txt_dv.getText()+
+                    "\nNombre..............."+txt_nombres.getText()+" "+txt_apellidos.getText();
+            
+            int respuesta = JOptionPane.showConfirmDialog(this,mensaje,"Confirmar reserva de hora",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(respuesta==0){                
+                ConEspHora controlador = new ConEspHora();
+                int id_EH = (int) tbl_horasDispo.getValueAt(tbl_horasDispo.getSelectedRow(), 0);
+                int reservar = controlador.reservarHora(id_EH, cliente_global.getId_cliente());
+                if(reservar == 1){
+                    JOptionPane.showConfirmDialog(this,"La hora fue agendada con éxito","Hora reservada",JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                    ReservaHora ventana = new ReservaHora(empleado);
+                    ventana.setVisible(true);
+                    this.dispose();
+                }
+            }
+            
+        }    
+                
+    }//GEN-LAST:event_btn_reservarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -735,10 +965,12 @@ public class ReservaHora extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_buscarHora;
     private javax.swing.JButton btn_buscarRut;
     private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_confirmCliente;
+    private javax.swing.JButton btn_confirmEsp;
     private javax.swing.JButton btn_editEmail;
-    private javax.swing.JButton btn_editTelefono;
     private javax.swing.JButton btn_genBolServicio;
     private javax.swing.JButton btn_informe;
     private javax.swing.JButton btn_limpiarCampos;
@@ -752,13 +984,12 @@ public class ReservaHora extends javax.swing.JFrame {
     private javax.swing.JPanel colorBody;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
-    private datechooser.beans.DateChooserPanel date_picker;
+    private datechooser.beans.DateChooserCombo date_picker;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -773,6 +1004,5 @@ public class ReservaHora extends javax.swing.JFrame {
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_nombres;
     private javax.swing.JTextField txt_rut;
-    private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
 }
