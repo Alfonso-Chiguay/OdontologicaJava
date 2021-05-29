@@ -1,4 +1,5 @@
 package vista.Empleado;
+import controlador.ConContacto;
 import controlador.ConOrdenPedido;
 import controlador.ConProducto;
 import controlador.ConProveedor;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import modelo.Contacto;
 import modelo.Empleado;
 import modelo.Producto;
@@ -28,6 +30,7 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
     }
    public Empleado empleado;
    public Proveedor prov;
+   public Contacto contac;
    
    public CrearRegistroOrd(Empleado emp) {
         initComponents();
@@ -60,6 +63,14 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         for(Producto p:listaProducto){
             cb_productos.addItem("["+String.valueOf(p.getId_producto())+"] - "+p.getNombre());
         }
+        
+        //Anchos de columnas
+        TableColumnModel columnModel = tbl_opedido.getColumnModel();
+        columnModel.getColumn(0).setMaxWidth(40);
+        columnModel.getColumn(1).setMaxWidth(200);
+        columnModel.getColumn(2).setMaxWidth(80);
+        columnModel.getColumn(3).setMaxWidth(150);
+        columnModel.getColumn(4).setMaxWidth(150);
     }
 
     /**
@@ -100,6 +111,7 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         txt_dv = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         btn_confirmarProv = new javax.swing.JButton();
+        btn_nombreCon = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_opedido = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -109,7 +121,6 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         sp_cantidad = new javax.swing.JSpinner();
         btn_cantidadMas = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
-        btn_ediCant = new javax.swing.JButton();
         btn_EliminarFila = new javax.swing.JButton();
         btn_generarOrden = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
@@ -257,33 +268,28 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         jLabel21.setText("Rubro");
 
         txt_rut.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txt_rut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_rutActionPerformed(evt);
+        txt_rut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_rutKeyTyped(evt);
             }
         });
 
         txt_nombreContacto.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_nombreContacto.setEnabled(false);
-        txt_nombreContacto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nombreContactoActionPerformed(evt);
+        txt_nombreContacto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreContactoKeyTyped(evt);
             }
         });
 
         txt_razonsocial.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_razonsocial.setEnabled(false);
-        txt_razonsocial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_razonsocialActionPerformed(evt);
-            }
-        });
 
         txt_email.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_email.setEnabled(false);
-        txt_email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_emailActionPerformed(evt);
+        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_emailKeyTyped(evt);
             }
         });
 
@@ -294,17 +300,23 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
                 txt_telefonoActionPerformed(evt);
             }
         });
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
+        });
 
         cb_rubro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cb_rubro.setForeground(new java.awt.Color(255, 255, 255));
         cb_rubro.setEnabled(false);
-        cb_rubro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_rubroActionPerformed(evt);
-            }
-        });
 
         btn_telefono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editicon.png"))); // NOI18N
+        btn_telefono.setEnabled(false);
+        btn_telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_telefonoActionPerformed(evt);
+            }
+        });
 
         btn_buscarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchicon.png"))); // NOI18N
         btn_buscarProv.setText("Buscar");
@@ -315,11 +327,17 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         });
 
         btn_email.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editicon.png"))); // NOI18N
+        btn_email.setEnabled(false);
+        btn_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_emailActionPerformed(evt);
+            }
+        });
 
         txt_dv.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        txt_dv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_dvActionPerformed(evt);
+        txt_dv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dvKeyTyped(evt);
             }
         });
 
@@ -335,6 +353,14 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         btn_confirmarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_confirmarProvActionPerformed(evt);
+            }
+        });
+
+        btn_nombreCon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editicon.png"))); // NOI18N
+        btn_nombreCon.setEnabled(false);
+        btn_nombreCon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nombreConActionPerformed(evt);
             }
         });
 
@@ -370,10 +396,15 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
                                     .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cb_rubro, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
                         .addGroup(formOrden2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_telefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(formOrden2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(formOrden2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_telefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, formOrden2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_nombreCon, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         formOrden2Layout.setVerticalGroup(
@@ -394,7 +425,9 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_nombreContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(formOrden2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_nombreContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_nombreCon, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -450,6 +483,11 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
 
         sp_cantidad.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         sp_cantidad.setEnabled(false);
+        sp_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                sp_cantidadKeyTyped(evt);
+            }
+        });
 
         btn_cantidadMas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregar.png"))); // NOI18N
         btn_cantidadMas.setEnabled(false);
@@ -462,11 +500,6 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Cantidad");
-
-        btn_ediCant.setBackground(new java.awt.Color(255, 255, 0));
-        btn_ediCant.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_ediCant.setText("Editar cantidad");
-        btn_ediCant.setEnabled(false);
 
         btn_EliminarFila.setBackground(new java.awt.Color(204, 0, 0));
         btn_EliminarFila.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -494,6 +527,11 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
 
         txt_precio.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         txt_precio.setEnabled(false);
+        txt_precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_precioKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -507,12 +545,7 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btn_generarOrden, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(btn_ediCant)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btn_EliminarFila, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btn_generarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -533,6 +566,8 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_cantidadMas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(122, 122, 122)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_EliminarFila, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -555,14 +590,12 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_ediCant, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_EliminarFila, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btn_generarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(75, 75, 75))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(formOrden2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -680,43 +713,35 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
-    private void txt_rutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_rutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_rutActionPerformed
-
-    private void txt_nombreContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreContactoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nombreContactoActionPerformed
-
-    private void txt_razonsocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_razonsocialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_razonsocialActionPerformed
-
-    private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_emailActionPerformed
-
     private void txt_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_telefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_telefonoActionPerformed
 
-    private void cb_rubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_rubroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_rubroActionPerformed
-
     private void btn_buscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarProvActionPerformed
         ConProveedor controlador = new ConProveedor();
+        Validaciones validar = new Validaciones();
+        if(!validar.validaRut(txt_rut.getText()+"-"+txt_dv.getText())){
+            JOptionPane.showMessageDialog(this, "Ingrese un rut valido");
+            return;
+        }
         if(controlador.existeProveedor(txt_rut.getText(), txt_dv.getText())){
             Object[] info = controlador.buscarProveedor(txt_rut.getText());
             Proveedor proveedor = (Proveedor)info[0];
             prov = proveedor;
             Contacto contacto = (Contacto) info[1];
+            contac = contacto;
             txt_razonsocial.setText(proveedor.getRazon_social());
             cb_rubro.setSelectedIndex(proveedor.getRubro().getId_rubro());
             txt_nombreContacto.setText(contacto.getNombre());
             txt_email.setText(contacto.getEmail());
             txt_telefono.setText(contacto.getTelefono());
             btn_confirmarProv.setEnabled(true);
+            btn_nombreCon.setEnabled(true);
+            btn_telefono.setEnabled(true);
+            btn_email.setEnabled(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "No se encontró un proveedor con rut ingresado");
         }
     }//GEN-LAST:event_btn_buscarProvActionPerformed
 
@@ -776,16 +801,24 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
 
-    private void txt_dvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dvActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_dvActionPerformed
-
     private void btn_cantidadMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cantidadMasActionPerformed
         String selectedItem = (String) cb_productos.getSelectedItem();
         int id_producto = Integer.parseInt(selectedItem.replace("[", "").replace("]","ñ").split("ñ")[0]);
         String detalle = selectedItem.replace(" - ", "ÑÑ").split("ÑÑ")[1];
         int cantidad = (int) sp_cantidad.getValue();
+        
+        if(cantidad<=0){
+            JOptionPane.showMessageDialog(this, "La cantidad no puede ser negativa ni 0");
+            return;
+        }
+        
         int precio = Integer.parseInt(txt_precio.getText());
+        
+        if(precio<=0){
+            JOptionPane.showMessageDialog(this, "El precio no puede ser negativo ni 0");
+            return;
+        }
+        
         int total = cantidad*precio;
         Object[] fila = {id_producto,detalle,
                         cantidad,
@@ -810,8 +843,41 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingrese un email valido");
             return;
         }
+        int largoTelefono = txt_telefono.getText().length();
+        if(largoTelefono>0 && largoTelefono<9){
+            JOptionPane.showMessageDialog(this, "Ingrese un telefono valido o vacío");
+            return;
+        }
+        
+        if(!contac.getEmail().toLowerCase().equals(txt_email.getText().toLowerCase()) || 
+            !contac.getTelefono().toLowerCase().equals(txt_telefono.getText().toLowerCase()) ||
+              !contac.getNombre().toLowerCase().equals(txt_nombreContacto.getText().toLowerCase())){
+            
+            String mensaje = "¿Desea actualizar los datos del contacto?";
+            //SI=0, NO=1, CANCEL=2
+            int actualizarContacto = JOptionPane.showConfirmDialog(this,mensaje,"Actualizar contacto",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            if(actualizarContacto==0){
+                ConContacto controlador = new ConContacto();
+                int response = controlador.actualizarContacto(contac.getId_contacto(), txt_telefono.getText(), txt_email.getText(),txt_nombreContacto.getText());
+                if(response==1){
+                    JOptionPane.showMessageDialog(this, "Contacto actualizado correctamente");
+                    contac.setEmail(txt_email.getText());
+                    contac.setTelefono(txt_telefono.getText());
+                }
+                else{
+                    JOptionPane.showMessageDialog(this, "Hubo un problema actualizando la informacion del contacto, contáctese con el departamento de informatica");
+                    return;
+                }
+            }
+        }
+        
         txt_rut.setText(String.valueOf(prov.getRut()));
         txt_dv.setText(prov.getDv());
+        txt_email.setText(contac.getEmail());
+        txt_telefono.setText(contac.getTelefono());
+        txt_email.setEnabled(false);
+        txt_telefono.setEnabled(false);
+        txt_nombreContacto.setEnabled(false);
         txt_rut.setEnabled(false);
         txt_dv.setEnabled(false);
         btn_buscarProv.setEnabled(false);
@@ -822,11 +888,65 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         sp_cantidad.setEnabled(true);
         btn_cantidadMas.setEnabled(true);
         tbl_opedido.setEnabled(true);
-        btn_ediCant.setEnabled(true);
         btn_EliminarFila.setEnabled(true);
         btn_generarOrden.setEnabled(true);
+        btn_telefono.setVisible(false);
+        btn_email.setVisible(false);
                 
     }//GEN-LAST:event_btn_confirmarProvActionPerformed
+
+    private void btn_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_telefonoActionPerformed
+        txt_telefono.setEnabled(true);
+    }//GEN-LAST:event_btn_telefonoActionPerformed
+
+    private void btn_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_emailActionPerformed
+        txt_email.setEnabled(true);
+    }//GEN-LAST:event_btn_emailActionPerformed
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))) evt.consume();        
+        if(txt_telefono.getText().length()==12) evt.consume();   
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
+        char enter = evt.getKeyChar();        
+        if(txt_email.getText().length()==50) evt.consume();   
+    }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void btn_nombreConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nombreConActionPerformed
+        txt_nombreContacto.setEnabled(true);                
+    }//GEN-LAST:event_btn_nombreConActionPerformed
+
+    private void txt_nombreContactoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreContactoKeyTyped
+        char enter = evt.getKeyChar();
+        if(Character.isDigit(enter)) evt.consume();        
+        if(txt_nombreContacto.getText().length()==100) evt.consume();   
+    }//GEN-LAST:event_txt_nombreContactoKeyTyped
+
+    private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))) evt.consume();        
+        if(txt_rut.getText().length()==8) evt.consume();   
+    }//GEN-LAST:event_txt_rutKeyTyped
+
+    private void txt_dvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dvKeyTyped
+        char enter = evt.getKeyChar();             
+        if(enter!='k' && enter!='K'){
+            if(!(Character.isDigit(enter))) evt.consume();                        
+        }               
+        if(txt_dv.getText().length() == 1) evt.consume(); 
+    }//GEN-LAST:event_txt_dvKeyTyped
+
+    private void sp_cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sp_cantidadKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))) evt.consume();  
+    }//GEN-LAST:event_sp_cantidadKeyTyped
+
+    private void txt_precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_precioKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))) evt.consume();  
+    }//GEN-LAST:event_txt_precioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -869,12 +989,12 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
     private javax.swing.JButton btn_buscarProv;
     private javax.swing.JButton btn_cantidadMas;
     private javax.swing.JButton btn_confirmarProv;
-    private javax.swing.JButton btn_ediCant;
     private javax.swing.JButton btn_email;
     private javax.swing.JButton btn_genBolServicio;
     private javax.swing.JButton btn_generarOrden;
     private javax.swing.JButton btn_informe;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_nombreCon;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente;
     private javax.swing.JButton btn_regProveedor;

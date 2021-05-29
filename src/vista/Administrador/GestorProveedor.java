@@ -211,6 +211,11 @@ public class GestorProveedor extends javax.swing.JFrame {
         btn_editarProv.setForeground(new java.awt.Color(255, 255, 255));
         btn_editarProv.setText("Editar");
         btn_editarProv.setBorderPainted(false);
+        btn_editarProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarProvActionPerformed(evt);
+            }
+        });
 
         btn_cancelProv.setBackground(new java.awt.Color(17, 175, 191));
         btn_cancelProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -457,6 +462,10 @@ public class GestorProveedor extends javax.swing.JFrame {
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         listar();
     }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void btn_editarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarProvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_editarProvActionPerformed
 
     /**
      * @param args the command line arguments

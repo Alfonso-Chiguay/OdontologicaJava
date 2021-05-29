@@ -1,7 +1,13 @@
 package vista.Empleado;
+import controlador.ConOrdenPedido;
+import java.awt.Color;
 import vista.*;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import modelo.Empleado;
 
 
@@ -12,6 +18,7 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
         initComponents();
     }
    public Empleado empleado;
+   public int id_opedido;
    
    public AprobRegistroOrden(Empleado emp) {
         initComponents();
@@ -28,7 +35,28 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
         btn_resHora.setBackground(colorBotonTop.getBackground());
         btn_regProveedor.setBackground(colorBotonTop.getBackground());
         btn_logout.setBackground(colorTop.getBackground());
+        
+        //Anchos de columnas
+        TableColumnModel columnModel = tbl_opedido.getColumnModel();
+        columnModel.getColumn(0).setMaxWidth(40);
+        columnModel.getColumn(1).setMaxWidth(200);
+        columnModel.getColumn(2).setMaxWidth(80);
+        columnModel.getColumn(3).setMaxWidth(150);
+        columnModel.getColumn(4).setMaxWidth(150);
+        
+        lbl_fechaCreacion.setVisible(false);
+        lbl_autor.setVisible(false);
+        lbl_estado.setVisible(false);
+        lbl_recepcionado.setVisible(false);
+
+        
+        tbl_opedido.setBackground(Color.WHITE);
+        panel_resumen.setVisible(false);
+        panel_resumen.setBackground(jPanel3.getBackground());
+        
     }
+
+           
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,13 +78,18 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
         btn_informe = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_nPedido = new javax.swing.JTextField();
         btn_buscarNPedido = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        btn_aprobar = new javax.swing.JButton();
+        btn_rechazar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_orden = new javax.swing.JTable();
-        btn_aprobRegOrden = new javax.swing.JButton();
-        btn_rechazaRegOrden = new javax.swing.JButton();
+        tbl_opedido = new javax.swing.JTable();
+        lbl_estado = new javax.swing.JLabel();
+        panel_resumen = new javax.swing.JPanel();
+        lbl_autor = new javax.swing.JLabel();
+        lbl_fechaCreacion = new javax.swing.JLabel();
+        lbl_recepcionado = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
@@ -156,8 +189,9 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
                 .addComponent(btn_ordenPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_genBolServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btn_informe, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(btn_informe, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         colorBotonTopLayout.setVerticalGroup(
             colorBotonTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,12 +206,13 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(181, 213, 212));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("N° Pedido");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        txt_nPedido.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_nPedido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nPedidoKeyTyped(evt);
             }
         });
 
@@ -190,91 +225,137 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Resumen orden de pedido ");
+        jLabel4.setText("Resumen de orden de pedido");
 
-        tbl_orden.setBackground(new java.awt.Color(240, 240, 240));
-        tbl_orden.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        tbl_orden.setForeground(new java.awt.Color(240, 240, 240));
-        tbl_orden.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Detalle", "Cantidad ", "Costo"
-            }
-        ));
-        jScrollPane1.setViewportView(tbl_orden);
-
-        btn_aprobRegOrden.setBackground(new java.awt.Color(17, 175, 191));
-        btn_aprobRegOrden.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_aprobRegOrden.setText("Aprobar");
-        btn_aprobRegOrden.addActionListener(new java.awt.event.ActionListener() {
+        btn_aprobar.setBackground(new java.awt.Color(17, 175, 191));
+        btn_aprobar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_aprobar.setText("Aprobar");
+        btn_aprobar.setEnabled(false);
+        btn_aprobar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_aprobRegOrdenActionPerformed(evt);
+                btn_aprobarActionPerformed(evt);
             }
         });
 
-        btn_rechazaRegOrden.setBackground(new java.awt.Color(204, 0, 0));
-        btn_rechazaRegOrden.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_rechazaRegOrden.setText("Rechazar");
+        btn_rechazar.setBackground(new java.awt.Color(204, 0, 0));
+        btn_rechazar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btn_rechazar.setText("Rechazar");
+        btn_rechazar.setEnabled(false);
+        btn_rechazar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_rechazarActionPerformed(evt);
+            }
+        });
+
+        tbl_opedido.setBackground(new java.awt.Color(240, 240, 240));
+        tbl_opedido.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        tbl_opedido.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        tbl_opedido.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Detalle", "Cantidad ", "Costo unit", "Costo total"
+            }
+        ));
+        tbl_opedido.setEnabled(false);
+        tbl_opedido.setGridColor(new java.awt.Color(204, 255, 255));
+        tbl_opedido.setPreferredSize(new java.awt.Dimension(280, 160));
+        tbl_opedido.setSelectionBackground(new java.awt.Color(0, 153, 153));
+        jScrollPane1.setViewportView(tbl_opedido);
+
+        lbl_estado.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lbl_estado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbl_estado.setText("ESTADO");
+
+        lbl_autor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lbl_autor.setText("Autor: (autor)");
+
+        lbl_fechaCreacion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lbl_fechaCreacion.setText("Fecha creacion: (fecha c)");
+
+        lbl_recepcionado.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        lbl_recepcionado.setText("Recepcionado: (recepcion)");
+
+        javax.swing.GroupLayout panel_resumenLayout = new javax.swing.GroupLayout(panel_resumen);
+        panel_resumen.setLayout(panel_resumenLayout);
+        panel_resumenLayout.setHorizontalGroup(
+            panel_resumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 348, Short.MAX_VALUE)
+            .addGroup(panel_resumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_resumenLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panel_resumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbl_fechaCreacion, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_autor, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_recepcionado, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap()))
+        );
+        panel_resumenLayout.setVerticalGroup(
+            panel_resumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 64, Short.MAX_VALUE)
+            .addGroup(panel_resumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panel_resumenLayout.createSequentialGroup()
+                    .addGap(5, 5, 5)
+                    .addComponent(lbl_autor)
+                    .addGap(0, 0, 0)
+                    .addComponent(lbl_fechaCreacion)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_recepcionado, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(5, 5, 5)))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(370, 370, 370)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_buscarNPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(332, 332, 332))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btn_aprobRegOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
-                        .addComponent(btn_rechazaRegOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(383, 383, 383))))
+                        .addComponent(btn_aprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_rechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(panel_resumen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txt_nPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btn_buscarNPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(314, 314, 314)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btn_buscarNPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_buscarNPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_nPedido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(236, 236, 236))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_rechazaRegOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_aprobRegOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(146, 146, 146))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panel_resumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_aprobar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_rechazar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -299,7 +380,6 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
         colorTop.setLayout(colorTopLayout);
         colorTopLayout.setHorizontalGroup(
             colorTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(colorBotonTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(colorTopLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel3)
@@ -311,9 +391,12 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, colorTopLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_logout)
-                        .addContainerGap())))
+                        .addGap(30, 30, 30))))
+            .addGroup(colorTopLayout.createSequentialGroup()
+                .addComponent(colorBotonTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         colorTopLayout.setVerticalGroup(
@@ -330,8 +413,8 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addGroup(colorTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_usuario)
-                            .addComponent(btn_logout))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(btn_logout))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(colorBotonTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -341,7 +424,9 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(colorTop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(colorTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,23 +473,110 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
         ventanaOrdenped.setVisible(true);
     }//GEN-LAST:event_btn_ordenPedidoActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void buscarNPedido(){
+        int npedido = Integer.parseInt(txt_nPedido.getText());
+        ConOrdenPedido controlador = new ConOrdenPedido();
+        ArrayList<Object[]> lista = controlador.obtenerOPedido(npedido);
+        DefaultTableModel table = (DefaultTableModel) tbl_opedido.getModel();
+        table.setRowCount(0);
+        boolean existe=false;
+        for(Object[] o: lista){
+            if(!((String)o[0]).equals("NO EXISTE")){
+                existe=true;
+                lbl_fechaCreacion.setVisible(true);
+                lbl_autor.setVisible(true);
+                lbl_estado.setVisible(true);
+                lbl_recepcionado.setVisible(true);
 
+                panel_resumen.setVisible(true);
+                
+                lbl_autor.setText("Autor: "+(String)o[0]);
+                lbl_fechaCreacion.setText("Fecha creacion: "+(String)o[2]);
+                lbl_recepcionado.setText("Recepcionado: "+(String)o[1]);
+                
+                //P=Pendiente, R=Rechazado, A=Aprobado
+                if(((String)o[3]).equals("P")){
+                    lbl_estado.setText("PENDIENTE");
+                    lbl_estado.setForeground(Color.yellow);
+                    btn_aprobar.setEnabled(true);
+                    btn_rechazar.setEnabled(true);
+                    btn_aprobar.setVisible(true);
+                    btn_rechazar.setVisible(true);
+                }
+                else if(((String)o[3]).equals("A")){
+                    lbl_estado.setText("APROBADO");
+                    lbl_estado.setForeground(colorTop.getBackground());
+                    btn_aprobar.setVisible(false);
+                    btn_rechazar.setVisible(false);
+                }
+                else{
+                    lbl_estado.setText("RECHAZADO");
+                    lbl_estado.setForeground(Color.red);
+                    btn_aprobar.setVisible(false);
+                    btn_rechazar.setVisible(false);
+                }
+                
+                Object[] fila = {
+                    (int)o[4],
+                    (String)o[8],
+                    (int)o[5],
+                    (int)o[6],
+                    (int)o[7]                    
+                };
+                
+                table.addRow(fila);
+            }
+        }
+        
+        if(!existe){
+            lbl_fechaCreacion.setVisible(false);
+            lbl_autor.setVisible(false);
+            lbl_estado.setVisible(false);
+            lbl_recepcionado.setVisible(false);
+            panel_resumen.setVisible(false);
+        }
+        else{
+            id_opedido=npedido;
+        }
+    }
+    
     private void btn_buscarNPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarNPedidoActionPerformed
-        // TODO add your handling code here:
+        buscarNPedido();                   
+                
     }//GEN-LAST:event_btn_buscarNPedidoActionPerformed
 
-    private void btn_aprobRegOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aprobRegOrdenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_aprobRegOrdenActionPerformed
+    private void btn_aprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aprobarActionPerformed
+        ConOrdenPedido controlador = new ConOrdenPedido();
+        if(controlador.aprobarRechazar(id_opedido, "A")==1){
+            JOptionPane.showMessageDialog(this, "La orden n° "+String.valueOf(id_opedido)+" se ha marcado como aprobada y recepcionada");
+            buscarNPedido();     
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Hubo un problema aprobando la orden, por favor pongase en contacto con el departamento de informatica");
+        }
+    }//GEN-LAST:event_btn_aprobarActionPerformed
 
     private void btn_genBolServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_genBolServicioActionPerformed
         this.dispose();
         RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(empleado);
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
+
+    private void txt_nPedidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nPedidoKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))) evt.consume();  
+    }//GEN-LAST:event_txt_nPedidoKeyTyped
+
+    private void btn_rechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rechazarActionPerformed
+        ConOrdenPedido controlador = new ConOrdenPedido();
+        if(controlador.aprobarRechazar(id_opedido, "R")==1){
+            JOptionPane.showMessageDialog(this, "La orden n° "+String.valueOf(id_opedido)+" se ha marcado como rechazada");
+            buscarNPedido();     
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Hubo un problema rechazando la orden, por favor pongase en contacto con el departamento de informatica");
+        }
+    }//GEN-LAST:event_btn_rechazarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,13 +615,13 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_aprobRegOrden;
+    private javax.swing.JButton btn_aprobar;
     private javax.swing.JButton btn_buscarNPedido;
     private javax.swing.JButton btn_genBolServicio;
     private javax.swing.JButton btn_informe;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
-    private javax.swing.JButton btn_rechazaRegOrden;
+    private javax.swing.JButton btn_rechazar;
     private javax.swing.JButton btn_regCliente;
     private javax.swing.JButton btn_regProveedor;
     private javax.swing.JButton btn_resHora;
@@ -461,8 +633,13 @@ public class AprobRegistroOrden extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbl_autor;
+    private javax.swing.JLabel lbl_estado;
+    private javax.swing.JLabel lbl_fechaCreacion;
+    private javax.swing.JLabel lbl_recepcionado;
     private javax.swing.JLabel lbl_usuario;
-    private javax.swing.JTable tbl_orden;
+    private javax.swing.JPanel panel_resumen;
+    private javax.swing.JTable tbl_opedido;
+    private javax.swing.JTextField txt_nPedido;
     // End of variables declaration//GEN-END:variables
 }

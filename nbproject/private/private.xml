@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/RegistrarCliente.java</file>
-            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/MainEmpleado.java</file>
-            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Login.java</file>
-            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/ReservaHora.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/CrearRegistroOrd.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/controlador/ConContacto.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/EditarProveedorEmp.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Administrador/CrearProveedor.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/CrearRegistroBoleta.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/controlador/ConOrdenPedido.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/RegistroProv.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/controlador/ConProveedor.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/AprobRegistroOrden.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/EditarBuscarProv.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/RegistrarBoleta.java</file>
+            <file>file:/C:/Users/alfon/Documents/NetBeansProjects/OdontoGit/OdontologicaJava/src/vista/Empleado/CrearRegistroProv.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,12 +5,16 @@ public class Horario {
     private int dia;
     private String hora_ini;
     private String hora_fin;
+    private int mes;
+    private int anio;
     
     public Horario(){
         this.id_horario=0;
         this.dia=0;
         this.hora_ini="";
         this.hora_fin="";
+        this.mes=0;
+        this.anio=0;
     }
 
     public int getId_horario() {
@@ -44,6 +48,24 @@ public class Horario {
     public void setHora_fin(String hora_fin) {
         this.hora_fin = hora_fin;
     }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+    
+    
     
     
 }

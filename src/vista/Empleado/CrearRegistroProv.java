@@ -1,8 +1,16 @@
 package vista.Empleado;
+import controlador.ConProveedor;
+import controlador.ConRubro;
+import controlador.Validaciones;
 import vista.*;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import modelo.Contacto;
 import modelo.Empleado;
+import modelo.Proveedor;
+import modelo.Rubro;
 
 
 public class CrearRegistroProv extends javax.swing.JFrame {
@@ -28,6 +36,13 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         btn_resHora.setBackground(colorBotonTop.getBackground());
         btn_regProveedor.setBackground(colorBotonTop.getBackground());
         btn_logout.setBackground(colorTop.getBackground());
+        
+        ConRubro conRub = new ConRubro();
+        ArrayList<Rubro> listaRubro = conRub.listarRubro();
+        cb_rubro.addItem("Seleccione un rubro");
+        for(Rubro r: listaRubro){
+            cb_rubro.addItem(String.valueOf("("+r.getId_rubro())+")"+r.getNombre());
+        }
     }
 
     /**
@@ -56,16 +71,17 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        btn_buscarPorRut = new javax.swing.JButton();
-        btn_limpiar = new javax.swing.JButton();
+        txt_rut = new javax.swing.JTextField();
+        txt_contacto = new javax.swing.JTextField();
+        txt_razonSocial = new javax.swing.JTextField();
+        txt_email = new javax.swing.JTextField();
+        txt_telefono = new javax.swing.JTextField();
+        cb_rubro = new javax.swing.JComboBox<>();
+        txt_dv = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         btn_crearProv = new javax.swing.JButton();
-        btn_cancelar = new javax.swing.JButton();
+        btn_limpiarProv = new javax.swing.JButton();
+        btn_cancelProv = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
@@ -183,70 +199,77 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(181, 213, 212));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos Proveedor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 18), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Rut ");
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Razón social proveedor ");
+        jLabel5.setText("Razón social");
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nombre contacto");
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Telefono");
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Correo electronico");
 
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Rubro");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        txt_rut.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_rut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_rutKeyTyped(evt);
             }
         });
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+        txt_contacto.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_contacto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_contactoKeyTyped(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+        txt_razonSocial.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_razonSocial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_razonSocialKeyTyped(evt);
             }
         });
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+        txt_email.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_emailKeyTyped(evt);
             }
         });
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+        txt_telefono.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Times New Roman", 1, 10)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ortodoncia ", "Laborario", "Implantologia", " " }));
+        cb_rubro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
-        btn_buscarPorRut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/searchicon.png"))); // NOI18N
-        btn_buscarPorRut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarPorRutActionPerformed(evt);
+        txt_dv.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_dv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dvKeyTyped(evt);
             }
         });
+
+        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 13)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("-");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -258,25 +281,26 @@ public class CrearRegistroProv extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel8)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel5)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                                .addComponent(jTextField2)
-                                .addComponent(jTextField4)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(btn_buscarPorRut)))
-                        .addGap(0, 170, Short.MAX_VALUE))))
+                                .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(txt_dv, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_razonSocial, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                            .addComponent(txt_contacto)
+                            .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_rubro, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 39, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,52 +308,63 @@ public class CrearRegistroProv extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_buscarPorRut, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_rut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_dv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_razonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_contacto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cb_rubro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
-
-        btn_limpiar.setBackground(new java.awt.Color(17, 175, 191));
-        btn_limpiar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_limpiar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_limpiar.setText("Limpiar campos");
-        btn_limpiar.setBorderPainted(false);
 
         btn_crearProv.setBackground(new java.awt.Color(17, 175, 191));
         btn_crearProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_crearProv.setForeground(new java.awt.Color(255, 255, 255));
         btn_crearProv.setText("Crear Proveedor");
         btn_crearProv.setBorderPainted(false);
-
-        btn_cancelar.setBackground(new java.awt.Color(17, 175, 191));
-        btn_cancelar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_cancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_cancelar.setText("Cancelar");
-        btn_cancelar.setBorderPainted(false);
-        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+        btn_crearProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cancelarActionPerformed(evt);
+                btn_crearProvActionPerformed(evt);
+            }
+        });
+
+        btn_limpiarProv.setBackground(new java.awt.Color(17, 175, 191));
+        btn_limpiarProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_limpiarProv.setForeground(new java.awt.Color(255, 255, 255));
+        btn_limpiarProv.setText("Limpiar campos");
+        btn_limpiarProv.setBorderPainted(false);
+        btn_limpiarProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiarProvActionPerformed(evt);
+            }
+        });
+
+        btn_cancelProv.setBackground(new java.awt.Color(17, 175, 191));
+        btn_cancelProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_cancelProv.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cancelProv.setText("Cancelar");
+        btn_cancelProv.setBorderPainted(false);
+        btn_cancelProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelProvActionPerformed(evt);
             }
         });
 
@@ -338,28 +373,28 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(375, 375, 375)
+                .addGap(373, 373, 373)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btn_crearProv)
-                        .addGap(27, 27, 27)
-                        .addComponent(btn_limpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btn_crearProv, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_limpiarProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_cancelProv, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_crearProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_limpiarProv, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(btn_crearProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_cancelProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
@@ -467,36 +502,6 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         ventanaRegprov.setVisible(true);
     }//GEN-LAST:event_btn_regProveedorActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void btn_buscarPorRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarPorRutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_buscarPorRutActionPerformed
-
-    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        MainEmpleado ventanaMain = new MainEmpleado(empleado);
-        ventanaMain.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btn_cancelarActionPerformed
-
     private void btn_ordenPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ordenPedidoActionPerformed
         this.dispose();
         RegistrarOrden ventanaOrdenped = new RegistrarOrden(empleado);
@@ -508,6 +513,127 @@ public class CrearRegistroProv extends javax.swing.JFrame {
         RegistrarBoleta ventanaRegBol = new  RegistrarBoleta(empleado);
         ventanaRegBol.setVisible(true);
     }//GEN-LAST:event_btn_genBolServicioActionPerformed
+
+    private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))) evt.consume();
+        if(txt_rut.getText().length()==8) evt.consume();
+    }//GEN-LAST:event_txt_rutKeyTyped
+
+    private void txt_contactoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_contactoKeyTyped
+        char enter = evt.getKeyChar();
+        if(Character.isDigit(enter)) evt.consume();
+        if(txt_contacto.getText().length() == 100) evt.consume();
+    }//GEN-LAST:event_txt_contactoKeyTyped
+
+    private void txt_razonSocialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_razonSocialKeyTyped
+        if(txt_razonSocial.getText().length() == 100) evt.consume();
+    }//GEN-LAST:event_txt_razonSocialKeyTyped
+
+    private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
+        if(txt_email.getText().length() == 50) evt.consume();
+    }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        char enter = evt.getKeyChar();
+        if(!Character.isDigit(enter)) evt.consume();
+        if(txt_telefono.getText().length() == 12) evt.consume();
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_dvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dvKeyTyped
+        char enter = evt.getKeyChar();
+        if(enter!='k' && enter!='K'){
+            if(!(Character.isDigit(enter))) evt.consume();
+        }
+        if(txt_dv.getText().length() == 1) evt.consume();
+    }//GEN-LAST:event_txt_dvKeyTyped
+
+    private void btn_crearProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearProvActionPerformed
+        ConProveedor conProv = new ConProveedor();
+        Validaciones validador = new Validaciones();
+        String rut_jv=txt_rut.getText()+"-"+txt_dv.getText();
+        if(!validador.validaRut(rut_jv)){
+            JOptionPane.showMessageDialog(this, "Rut invalido");
+            return;
+        }
+
+        if(conProv.existeProveedor(txt_rut.getText(), txt_dv.getText())){
+            JOptionPane.showMessageDialog(this, "El Rut ya existe en la base de datos");
+            return;
+        }
+
+        if(txt_razonSocial.getText().length()<5){
+            JOptionPane.showMessageDialog(this, "Ingrese una razon social");
+            return;
+        }
+
+        if(txt_contacto.getText().length()<3){
+            JOptionPane.showMessageDialog(this, "Ingrese un contacto");
+            return;
+        }
+
+        if(txt_email.getText().length()>0 && !validador.validaEmail(txt_email.getText())){
+            JOptionPane.showMessageDialog(this, "Ingrese un email valido");
+            return;
+        }
+
+        int id_rubro = cb_rubro.getSelectedIndex();
+        if(id_rubro == 0){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un rubro");
+            return;
+        }
+
+        Proveedor proveedor = new Proveedor();
+        Contacto contacto = new Contacto();
+        Rubro rubro = new Rubro();
+
+        String rubro_str = (String) cb_rubro.getSelectedItem();
+        rubro_str = rubro_str.replace("(", "").replace(")","ñ");
+        String[] rubro_id ;
+        rubro_id = rubro_str.split("ñ");
+
+        rubro.setId_rubro(Integer.parseInt(rubro_id[0]));
+        rubro.setNombre(rubro_id[1]);
+
+        proveedor.setRut(Integer.parseInt(txt_rut.getText()));
+        proveedor.setDv(txt_dv.getText());
+        proveedor.setRazon_social(txt_razonSocial.getText());
+        proveedor.setRubro(rubro);
+
+        contacto.setNombre(txt_contacto.getText());
+        contacto.setTelefono(txt_telefono.getText());
+        contacto.setEmail(txt_email.getText());
+
+        int crear = conProv.CrearProveedor(proveedor, contacto);
+        if(crear == 1){
+            JOptionPane.showMessageDialog(this, "Proveedor creado exitosamente");
+            limpiarCampos();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Error creando proveedor");
+        }
+    }//GEN-LAST:event_btn_crearProvActionPerformed
+
+    private void limpiarCampos(){
+        txt_rut.setText("");
+        txt_dv.setText("");
+        txt_razonSocial.setText("");
+        txt_contacto.setText("");
+        txt_telefono.setText("");
+        txt_email.setText("");
+        cb_rubro.setSelectedIndex(0);
+    }
+    
+    
+    private void btn_cancelProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelProvActionPerformed
+        RegistroProv ventanaProveedor = new RegistroProv(empleado);
+        ventanaProveedor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btn_cancelProvActionPerformed
+
+    private void btn_limpiarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarProvActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btn_limpiarProvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -546,21 +672,21 @@ public class CrearRegistroProv extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_buscarPorRut;
-    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_cancelProv;
     private javax.swing.JButton btn_crearProv;
     private javax.swing.JButton btn_genBolServicio;
     private javax.swing.JButton btn_informe;
-    private javax.swing.JButton btn_limpiar;
+    private javax.swing.JButton btn_limpiarProv;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;
     private javax.swing.JButton btn_regCliente;
     private javax.swing.JButton btn_regProveedor;
     private javax.swing.JButton btn_resHora;
+    private javax.swing.JComboBox<String> cb_rubro;
     private javax.swing.JPanel colorBotonTop;
     private javax.swing.JPanel colorTop;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -570,11 +696,12 @@ public class CrearRegistroProv extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lbl_usuario;
+    private javax.swing.JTextField txt_contacto;
+    private javax.swing.JTextField txt_dv;
+    private javax.swing.JTextField txt_email;
+    private javax.swing.JTextField txt_razonSocial;
+    private javax.swing.JTextField txt_rut;
+    private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -116,4 +116,76 @@ public class ConProveedor {
         
         return retorno;
     }
+    
+    public Object[] buscarProveedor(String rut){
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();        
+        Object[] retorno = new Object[2];
+        try{
+            String query = "BEGIN PKG_PROVEEDOR.SP_OBTENER_PROVEEDORES(?,?); END;";
+            CallableStatement call = (CallableStatement) con.prepareCall(query);
+            call.setString(1,rut);
+            call.registerOutParameter(2, OracleTypes.CURSOR);
+            
+            call.execute();
+            ResultSet rs = (ResultSet)call.getObject(2);
+            while(rs.next()){              
+                Proveedor proveedor = new Proveedor();
+                proveedor.setId_proveedor(rs.getInt("ID_PROVEEDOR"));
+                proveedor.setRut(rs.getInt("RUT"));
+                proveedor.setDv(rs.getString("DV"));
+                proveedor.setRazon_social(rs.getString("RAZON_SOCIAL"));
+                Contacto contacto = new Contacto();
+                contacto.setEmail(rs.getString("EMAIL"));
+                contacto.setTelefono(rs.getString("TELEFONO"));
+                contacto.setNombre(rs.getString("NOMBRECONTACTO"));
+                contacto.setId_contacto(rs.getInt("ID_CONTACTO"));
+                
+                Rubro rubro = new Rubro();
+                rubro.setNombre(rs.getString("NOMBRE"));
+                rubro.setId_rubro(rs.getInt("ID_RUBRO"));
+                
+                proveedor.setRubro(rubro);
+                contacto.setProveedor(proveedor);                              
+                retorno[0]=proveedor;
+                retorno[1]=contacto;                       
+                
+            }
+            return retorno;
+        }
+        catch(Exception e){
+            System.out.println("Error|ConProveedor:buscarProveedor: "+e.getMessage());
+            Object[] o = {"no hay"};
+            return o;
+        }  
+        
+    }
+    
+    public int actualizarProveedor(int id_proveedor,String razon_social,int id_rubro,String contacto, String telefono, String email){
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();
+        try{
+            String query = "BEGIN PKG_PROVEEDOR.SP_MODIFICAR_PROVEEDOR(?,?,?,?,?,?);END;";
+            CallableStatement call = (CallableStatement) con.prepareCall(query);
+            call.setInt(1,id_proveedor);
+            call.setString(2, razon_social);
+            call.setInt(3, id_rubro);
+            call.setString(4, contacto);
+            call.setString(5, telefono);
+            call.setString(6,email);
+            
+            call.execute();
+            return 1;
+                    
+        }
+        catch(Exception e){
+            System.out.println("Error|ConProveedor:actualizarProveedor: "+e.getMessage());
+            return -1;
+        }
+        
+    }
+    
+    
+   
+    
 }

@@ -56,6 +56,42 @@ public class RegistrarCliente extends javax.swing.JFrame {
         
     }
 
+        public RegistrarCliente(Empleado emp, String rut, String dv) {
+            initComponents();
+            empleado=emp;
+            //Caracteristicas de la ventana
+            lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
+            lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
+            this.setResizable(false);
+            this.setTitle("Clinica Odontológica Linda Sonrisa | Menú empleado | Registrar cliente");
+            this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
+
+            //Asignar colores a los botones
+            btn_regCliente.setBackground(colorBotonTop.getBackground());
+            btn_resHora.setBackground(colorBotonTop.getBackground());
+            btn_regProveedor.setBackground(colorBotonTop.getBackground());
+            btn_logout.setBackground(colorTop.getBackground());
+            cb_rangoIngreso.setBackground(Color.WHITE);
+            btn_crear.setBackground(colorBotonTop.getBackground());
+            btn_cancelar.setBackground(colorBotonTop.getBackground());
+            btn_limpiarCampos.setBackground(colorBotonTop.getBackground());
+            txt_rut.setText(rut);
+            txt_dv.setText(dv);
+            
+            //LLenar combobox
+            ConSitEconomica conSitE = new ConSitEconomica();
+            ArrayList<SitEconomica> listaSitE = conSitE.listarSituaciones();
+            cb_rangoIngreso.addItem("Seleccione rango de ingresos");
+            for(SitEconomica se:listaSitE){
+                int ingMin=se.getIngreso_min();
+                int ingMax=se.getIngreso_max();
+                cb_rangoIngreso.addItem(String.format("%,d",ingMin).replace(",",".")+" - "+String.format("%,d",ingMax).replace(",","."));
+
+            }
+
+            ((JLabel)cb_rangoIngreso.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

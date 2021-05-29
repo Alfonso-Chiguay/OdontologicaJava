@@ -50,6 +50,36 @@ public class CrearCliente extends javax.swing.JFrame {
         }        
         ((JLabel)cb_rangoIngreso.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
     }
+    
+        public CrearCliente(Empleado emp, String rut, String dv) {
+            initComponents();
+            empleado = emp;
+            //Caracteristicas de la ventana
+            lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
+            lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
+            this.setResizable(false);
+            this.setTitle("Clinica Odontológica Linda Sonrisa | Menú Administrador | Administrar Cliente | Crear cliente");
+            this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png")));
+
+            //Asignar colores a los botones
+            btn_admCliente.setBackground(colorBotonTop.getBackground());
+            btn_admProveedor.setBackground(colorBotonTop.getBackground());
+            btn_ordenPedido.setBackground(colorBotonTop.getBackground());
+            btn_logout.setBackground(colorTop.getBackground());
+            cb_rangoIngreso.setBackground(Color.WHITE);
+            txt_rut.setText(rut);
+            txt_dv.setText(dv);
+            //LLenar combobox
+            ConSitEconomica conSitE = new ConSitEconomica();
+            ArrayList<SitEconomica> listaSitE = conSitE.listarSituaciones();
+            cb_rangoIngreso.addItem("Seleccione rango de ingresos");
+            for(SitEconomica se:listaSitE){
+                int ingMin=se.getIngreso_min();
+                int ingMax=se.getIngreso_max();
+                cb_rangoIngreso.addItem(String.format("%,d",ingMin).replace(",",".")+" - "+String.format("%,d",ingMax).replace(",","."));            
+            }        
+            ((JLabel)cb_rangoIngreso.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        }
 
 
     @SuppressWarnings("unchecked")

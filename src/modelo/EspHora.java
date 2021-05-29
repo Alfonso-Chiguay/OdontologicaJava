@@ -11,8 +11,7 @@ public class EspHora {
         this.id_esphora=0;
         this.disponible=false;
         this.especialista=new Especialista();
-        this.horario = new Horario();
-        this.cliente= new Cliente();
+        this.horario = new Horario();        
     }
 
     public int getId_esphora() {
