@@ -18,7 +18,7 @@ public class ConCliente {
             String query = "BEGIN PKG_CLIENTE.SP_INSERTAR_CLIENTE(?,?,?,?,?,?,?,?);END;";
             CallableStatement call = (CallableStatement) con.prepareCall(query);
             call.setInt(1, cliente.getRut());
-            call.setString(2,cliente.getDv());
+            call.setString(2,cliente.getDv().toLowerCase());
             call.setString(3,cliente.getNombres());
             call.setString(4,cliente.getApellidos());
             call.setString(5, cliente.getUsuario());
@@ -144,7 +144,7 @@ public class ConCliente {
         Conexion conexion = new Conexion();
         Connection con = conexion.getConnection();  
         String rut_bd="";
-        String rut_jv=rut+"-"+dv;
+        String rut_jv=rut+"-"+dv.toLowerCase();
         boolean retorno=false;
         try{
             String query = "BEGIN PKG_CLIENTE.SP_FILTRAR_CLIENTE(?,?); END;";

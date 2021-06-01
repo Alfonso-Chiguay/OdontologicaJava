@@ -507,7 +507,7 @@ public class EditarProveedorEmp extends javax.swing.JFrame {
     }
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(empleado);
+        MenuRegCliente ventanaRegistro = new MenuRegCliente(empleado);
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
@@ -600,17 +600,17 @@ public class EditarProveedorEmp extends javax.swing.JFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
        Validaciones validador = new Validaciones();
+        ConProveedor conProv = new ConProveedor();
         if(!validador.validaRut(txt_rut.getText()+"-"+txt_dv.getText())){
             JOptionPane.showMessageDialog(this, "Rut invalido");
             return;
         }
 
-        if(txt_razonSocial.getText().length()<3 || txt_razonSocial.getText().length()<3 ){
-            JOptionPane.showMessageDialog(this, "Ingrese Razón Social");
-            return;
+        if(conProv.existeProveedor(txt_rut.getText(), txt_dv.getText())){
+            JOptionPane.showMessageDialog(this, "El rut ya existe en la base de datos");
+            return;    
         }
-
-        if(txt_razonSocial.getText().length()<5){
+        if(txt_razonSocial.getText().length()<3){
            JOptionPane.showMessageDialog(this, "Ingrese una razon social"); 
            return; 
         }
@@ -653,7 +653,7 @@ public class EditarProveedorEmp extends javax.swing.JFrame {
         contacto.setTelefono(txt_telefono.getText());
         contacto.setEmail(txt_email.getText());
         
-        ConProveedor conProv = new ConProveedor();
+
         int actualizar= conProv.actualizarProveedor(proveedor.getId_proveedor(),proveedor.getRazon_social(),ru.getId_rubro(),
                 contacto.getNombre(),contacto.getTelefono(),contacto.getEmail());
         

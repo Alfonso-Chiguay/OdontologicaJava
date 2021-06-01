@@ -2,6 +2,7 @@ package vista;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import modelo.Empleado;
+import vista.Empleado.MenuRegCliente;
 import vista.Empleado.RegistrarBoleta;
 import vista.Empleado.RegistrarCliente;
 import vista.Empleado.RegistrarInforme;
@@ -259,7 +260,7 @@ public class MainEmpleado extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(empleado);
+        MenuRegCliente ventanaRegistro = new MenuRegCliente(empleado);
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 

@@ -362,6 +362,11 @@ public class CrearProveedor extends javax.swing.JFrame {
         btn_limpiarProv.setForeground(new java.awt.Color(255, 255, 255));
         btn_limpiarProv.setText("Limpiar campos");
         btn_limpiarProv.setBorderPainted(false);
+        btn_limpiarProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiarProvActionPerformed(evt);
+            }
+        });
 
         btn_cancelProv.setBackground(new java.awt.Color(17, 175, 191));
         btn_cancelProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -641,6 +646,10 @@ public class CrearProveedor extends javax.swing.JFrame {
     private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
         if(txt_email.getText().length() == 50) evt.consume();   
     }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void btn_limpiarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarProvActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btn_limpiarProvActionPerformed
 
     /**
      * @param args the command line arguments

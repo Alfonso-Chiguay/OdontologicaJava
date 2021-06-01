@@ -824,6 +824,8 @@ public class EditarCliente extends javax.swing.JFrame {
         txt_passDos.setText("");
         btn_reestablecer.setVisible(true);
         btn_reestablecer.setEnabled(true);
+        txt_passUno.setEnabled(true);
+        txt_passDos.setEnabled(true);
     }//GEN-LAST:event_btn_cambiarPasswordActionPerformed
 
     private void btn_editNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editNombreActionPerformed

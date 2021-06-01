@@ -8,7 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import modelo.Contacto;
 import modelo.Empleado;
+import modelo.Proveedor;
 
 
 public class GestorProveedor extends javax.swing.JFrame {
@@ -18,6 +20,7 @@ public class GestorProveedor extends javax.swing.JFrame {
         
     }
     public Empleado empleado;
+  
     
     public GestorProveedor(Empleado emp) {
         initComponents();
@@ -464,7 +467,19 @@ public class GestorProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_editarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarProvActionPerformed
-        // TODO add your handling code here:
+        int fila= tbl_Prov.getSelectedRow();
+        DefaultTableModel tabla = (DefaultTableModel) tbl_Prov.getModel();
+        String rut = (String) tabla.getValueAt(fila, 1);
+        ConProveedor controlador = new ConProveedor();
+        Object[] infoProveedor = controlador.buscarProveedor(rut.split("-")[0]);
+        Proveedor proveedor = (Proveedor)infoProveedor[0];
+        Contacto contacto = (Contacto)infoProveedor[1];
+
+    
+   
+        EditarProveedor ventana = new EditarProveedor(empleado,proveedor,contacto);
+        ventana.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_editarProvActionPerformed
 
     /**

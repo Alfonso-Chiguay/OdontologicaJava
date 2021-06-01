@@ -22,10 +22,14 @@ public class EditarProveedor extends javax.swing.JFrame {
         
     }
     public Empleado empleado;
+    public Proveedor proveedor;
+    public Contacto contacto;
     
-    public EditarProveedor(Empleado emp) {
+    public EditarProveedor(Empleado emp, Proveedor prov, Contacto cto) {
         initComponents();
         empleado = emp;
+        proveedor = prov;
+        contacto = cto;
         //Caracteristicas de la ventana
         lbl_usuario.setText(lbl_usuario.getText().replace("(usuario)", emp.getUsuario()));
         lbl_usuario.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -45,8 +49,21 @@ public class EditarProveedor extends javax.swing.JFrame {
         for(Rubro r: listaRubro){
             cb_rubro.addItem(String.valueOf("("+r.getId_rubro())+")"+r.getNombre());
         }
+        reestablecerCampos();
+        
     }
-
+    private void reestablecerCampos(){
+        //Autocompletar Campos
+        
+        txt_rut.setText(String.valueOf(proveedor.getRut()));
+        txt_dv.setText(proveedor.getDv());
+        txt_razonSocial.setText(proveedor.getRazon_social());
+        txt_contacto.setText(contacto.getNombre());
+        txt_telefono.setText(contacto.getTelefono());
+        txt_email.setText(contacto.getEmail());
+        cb_rubro.setSelectedIndex(proveedor.getRubro().getId_rubro());
+                
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -78,7 +95,7 @@ public class EditarProveedor extends javax.swing.JFrame {
         cb_rubro = new javax.swing.JComboBox<>();
         txt_dv = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        btn_crearProv = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
         btn_limpiarProv = new javax.swing.JButton();
         btn_cancelProv = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -235,6 +252,7 @@ public class EditarProveedor extends javax.swing.JFrame {
         jLabel9.setText("Rubro");
 
         txt_rut.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_rut.setEnabled(false);
         txt_rut.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_rutKeyTyped(evt);
@@ -272,6 +290,7 @@ public class EditarProveedor extends javax.swing.JFrame {
         cb_rubro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         txt_dv.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_dv.setEnabled(false);
         txt_dv.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_dvKeyTyped(evt);
@@ -346,22 +365,27 @@ public class EditarProveedor extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        btn_crearProv.setBackground(new java.awt.Color(17, 175, 191));
-        btn_crearProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_crearProv.setForeground(new java.awt.Color(255, 255, 255));
-        btn_crearProv.setText("Crear Proveedor");
-        btn_crearProv.setBorderPainted(false);
-        btn_crearProv.addActionListener(new java.awt.event.ActionListener() {
+        btn_guardar.setBackground(new java.awt.Color(17, 175, 191));
+        btn_guardar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_guardar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_guardar.setText("Guardar cambios");
+        btn_guardar.setBorderPainted(false);
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_crearProvActionPerformed(evt);
+                btn_guardarActionPerformed(evt);
             }
         });
 
         btn_limpiarProv.setBackground(new java.awt.Color(17, 175, 191));
         btn_limpiarProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_limpiarProv.setForeground(new java.awt.Color(255, 255, 255));
-        btn_limpiarProv.setText("Limpiar campos");
+        btn_limpiarProv.setText("Reestablecer campos");
         btn_limpiarProv.setBorderPainted(false);
+        btn_limpiarProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiarProvActionPerformed(evt);
+            }
+        });
 
         btn_cancelProv.setBackground(new java.awt.Color(17, 175, 191));
         btn_cancelProv.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -382,7 +406,7 @@ public class EditarProveedor extends javax.swing.JFrame {
                 .addGap(373, 373, 373)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(btn_crearProv, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_limpiarProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -398,7 +422,7 @@ public class EditarProveedor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_limpiarProv, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(btn_crearProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_cancelProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -539,68 +563,74 @@ public class EditarProveedor extends javax.swing.JFrame {
     }
     
     
-    private void btn_crearProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearProvActionPerformed
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         Validaciones validador = new Validaciones();
-        
+        ConProveedor conProv = new ConProveedor();
         if(!validador.validaRut(txt_rut.getText()+"-"+txt_dv.getText())){
-           JOptionPane.showMessageDialog(this, "Rut invalido"); 
-           return; 
+            JOptionPane.showMessageDialog(this, "Rut invalido");
+            return;
+        }
+        
+        if(conProv.existeProveedor(txt_rut.getText(), txt_dv.getText())){
+            JOptionPane.showMessageDialog(this, "El rut ya existe en la base de datos");
+            return;    
         }
 
-        if(txt_razonSocial.getText().length()<5){
-           JOptionPane.showMessageDialog(this, "Ingrese una razon social"); 
-           return; 
+        if(txt_razonSocial.getText().length()<3){
+            JOptionPane.showMessageDialog(this, "Ingrese una razon social");
+            return;
         }
-        
+
         if(txt_contacto.getText().length()<3){
-           JOptionPane.showMessageDialog(this, "Ingrese un contacto"); 
-           return; 
+            JOptionPane.showMessageDialog(this, "Ingrese un contacto");
+            return;
         }
-        
+
         if(txt_email.getText().length()>0 && !validador.validaEmail(txt_email.getText())){
-            JOptionPane.showMessageDialog(this, "Ingrese un email valido"); 
-            return;  
+            JOptionPane.showMessageDialog(this, "Ingrese un email valido");
+            return;
         }
-        
+
         int id_rubro = cb_rubro.getSelectedIndex();
         if(id_rubro == 0){
-           JOptionPane.showMessageDialog(this, "Debe seleccionar un rubro"); 
-           return;
-        }  
-        
-        Proveedor proveedor = new Proveedor();
-        Contacto contacto = new Contacto();
-        Rubro rubro = new Rubro();
-        
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un rubro");
+            return;
+        }
+
+        Proveedor prov = new Proveedor();
+        Contacto cto = new Contacto();
+        Rubro ru = new Rubro();
+
         String rubro_str = (String) cb_rubro.getSelectedItem();
         rubro_str = rubro_str.replace("(", "").replace(")","ñ");
         String[] rubro_id ;
         rubro_id = rubro_str.split("ñ");
-        
-        rubro.setId_rubro(Integer.parseInt(rubro_id[0]));
-        rubro.setNombre(rubro_id[1]);        
-        
-        
+
+        ru.setId_rubro(Integer.parseInt(rubro_id[0]));
+        ru.setNombre(rubro_id[1]);
+
         proveedor.setRut(Integer.parseInt(txt_rut.getText()));
         proveedor.setDv(txt_dv.getText());
         proveedor.setRazon_social(txt_razonSocial.getText());
-        proveedor.setRubro(rubro);
-        
+        proveedor.setRubro(ru);
+
         contacto.setNombre(txt_contacto.getText());
         contacto.setTelefono(txt_telefono.getText());
         contacto.setEmail(txt_email.getText());
-        
-        ConProveedor conProv = new ConProveedor();
-        int crear = conProv.CrearProveedor(proveedor, contacto);
-        if(crear == 1){
-            JOptionPane.showMessageDialog(this, "Proveedor creado exitosamente");
-            limpiarCampos();
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Error creando proveedor");
-        }
 
-    }//GEN-LAST:event_btn_crearProvActionPerformed
+        
+        int actualizar= conProv.actualizarProveedor(proveedor.getId_proveedor(),proveedor.getRazon_social(),ru.getId_rubro(),
+            contacto.getNombre(),contacto.getTelefono(),contacto.getEmail());
+
+        if(actualizar == 1){
+            JOptionPane.showMessageDialog(this, "Informacion actualizada exitosamente");
+            GestorProveedor ventana = new GestorProveedor(empleado);
+            ventana.setVisible(true);
+            this.dispose();
+        }
+        else JOptionPane.showMessageDialog(this, "Error modificando informacion");
+
+    }//GEN-LAST:event_btn_guardarActionPerformed
 
     private void txt_rutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rutKeyTyped
         char enter = evt.getKeyChar();
@@ -635,6 +665,10 @@ public class EditarProveedor extends javax.swing.JFrame {
     private void txt_emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyTyped
         if(txt_email.getText().length() == 50) evt.consume();   
     }//GEN-LAST:event_txt_emailKeyTyped
+
+    private void btn_limpiarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarProvActionPerformed
+        reestablecerCampos();
+    }//GEN-LAST:event_btn_limpiarProvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -685,7 +719,7 @@ public class EditarProveedor extends javax.swing.JFrame {
     private javax.swing.JButton btn_admEmpresa;
     private javax.swing.JButton btn_admProveedor;
     private javax.swing.JButton btn_cancelProv;
-    private javax.swing.JButton btn_crearProv;
+    private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_limpiarProv;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_ordenPedido;

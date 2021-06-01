@@ -679,7 +679,7 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
 
     private void btn_regClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regClienteActionPerformed
         this.dispose();
-        RegistrarCliente ventanaRegistro = new RegistrarCliente(empleado);
+        MenuRegCliente ventanaRegistro = new MenuRegCliente(empleado);
         ventanaRegistro.setVisible(true);
     }//GEN-LAST:event_btn_regClienteActionPerformed
 
@@ -892,6 +892,7 @@ public class CrearRegistroOrd extends javax.swing.JFrame {
         btn_generarOrden.setEnabled(true);
         btn_telefono.setVisible(false);
         btn_email.setVisible(false);
+        btn_nombreCon.setVisible(false);
                 
     }//GEN-LAST:event_btn_confirmarProvActionPerformed
 

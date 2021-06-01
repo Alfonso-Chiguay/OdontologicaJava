@@ -87,4 +87,43 @@ public class ConEspHora {
             return 0;
         }
     }
+    
+    public ArrayList<Object[]> horasPorCliente(int id_Cliente){
+        ArrayList<Object[]> listaRetorno = new ArrayList<Object[]>();
+        Conexion conexion = new Conexion();
+        Connection con = conexion.getConnection();
+        try{
+            String query= "BEGIN PKG_HORA_MEDICA.SP_HORAS_CLIENTE(?,?);END;";
+            CallableStatement call = (CallableStatement) con.prepareCall(query);
+            call.setInt(1, id_Cliente);
+            call.registerOutParameter(2, OracleTypes.CURSOR);
+            call.execute();
+            
+            ResultSet rs = (ResultSet)call.getObject(2);
+            while(rs.next()){ 
+                                
+                Object[] fila = {
+                    rs.getInt("ID_ESPHORA"),
+                    rs.getString("FECHA"),
+                    rs.getString("HORA"),
+                    rs.getString("NOMBRES"),
+                    rs.getString("NOMBRE_ESPECIALIDAD"),
+                    rs.getInt("COSTO_CONSULTA")                    
+                };
+                
+                listaRetorno.add(fila);
+            }
+            
+            
+        }
+        catch(Exception e){
+            System.out.println("Error|ConEspHora:horasPorCliente: "+e.getMessage());
+            Object[] fila = {-1};
+            listaRetorno.clear();
+            listaRetorno.add(fila);
+        }
+        
+        return listaRetorno;
+                
+    }
 }

@@ -722,10 +722,14 @@ public class CrearCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_dvKeyTyped
 
     private void txt_nombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombresKeyTyped
+        char enter = evt.getKeyChar();
+        if((Character.isDigit(enter))) evt.consume();     
         if(txt_nombres.getText().length() == 100) evt.consume();    
     }//GEN-LAST:event_txt_nombresKeyTyped
 
     private void txt_apellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidosKeyTyped
+        char enter = evt.getKeyChar();
+        if((Character.isDigit(enter))) evt.consume();    
         if(txt_apellidos.getText().length() == 100) evt.consume();  
     }//GEN-LAST:event_txt_apellidosKeyTyped
 
